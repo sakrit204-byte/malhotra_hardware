@@ -127,7 +127,7 @@
 
   /* Shadows exist to separate a floating layer from the page, nothing more. */
   --shadow-raised: 0 1px 2px rgb(28 27 25 / 0.05);
-  --shadow-overlay: 0 12px 32px -12px rgb(28 27 25 / 0.22), 0 2px 6px -2px rgb(28 27 25 / 0.1);
+  --shadow-overlay: 0 24px 48px -20px rgb(15 76 92 / 0.28), 0 2px 8px -2px rgb(28 27 25 / 0.1);
 
   /* Motion. Short, eased, and always tied to a state change. */
   --ease-quiet: cubic-bezier(0.22, 1, 0.36, 1);
@@ -196,8 +196,13 @@
   }
 
   ::selection {
-    background-color: var(--color-brass-wash);
+    background-color: var(--color-brand-wash);
     color: var(--color-ink);
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: var(--color-brand);
   }
 
   /* Anything decorative stops moving when the reader asks it to. Transitions

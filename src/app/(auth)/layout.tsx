@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Monogram } from "@/components/site/monogram";
 import { SiteFooter } from "@/components/site/site-footer";
 import { Container } from "@/components/ui/container";
 import { site } from "@/lib/site";
@@ -20,12 +21,12 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
 
       <header className="border-b border-line">
         <Container width="wide">
-          <div className="flex h-16 items-center justify-between">
-            <Link
-              href="/"
-              className="font-display text-lg leading-none tracking-tight text-ink"
-            >
-              {site.name}
+          <div className="flex h-[4.5rem] items-center justify-between">
+            <Link href="/" className="flex items-center gap-2.5">
+              <Monogram className="size-8" />
+              <span className="font-display text-[1.375rem] leading-none tracking-tight text-ink">
+                {site.name}
+              </span>
             </Link>
             <Link
               href="/products"
@@ -37,8 +38,12 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
         </Container>
       </header>
 
-      <main id="main" className="flex flex-1 items-start justify-center px-5 py-14 sm:py-20">
-        <div className="w-full max-w-md">{children}</div>
+      <main id="main" className="flex flex-1 items-start justify-center px-5 py-14 sm:py-24">
+        {/* The form sits on a raised sheet with a rule at its head, so the one
+            thing on the page reads as the one thing on the page. */}
+        <div className="w-full max-w-md border-t border-ink bg-surface-raised px-6 pb-8 pt-7 shadow-overlay sm:px-8 sm:pb-10">
+          {children}
+        </div>
       </main>
 
       <SiteFooter />

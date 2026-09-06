@@ -55,15 +55,15 @@ export function InquiryLine({
     >
       <Link
         href={productHref(line.product.slug)}
-        className="relative size-24 shrink-0 overflow-hidden border border-line bg-surface-sunken sm:size-28"
+        className="group relative size-24 shrink-0 overflow-hidden border border-line bg-surface-sunken sm:size-32"
       >
         {line.product.imageUrl ? (
           <Image
             src={line.product.imageUrl}
             alt={line.product.imageAlt}
             fill
-            sizes="7rem"
-            className="object-cover"
+            sizes="8rem"
+            className="object-cover transition-transform duration-500 ease-[--ease-quiet] group-hover:scale-105"
           />
         ) : null}
       </Link>
@@ -71,8 +71,8 @@ export function InquiryLine({
       <div className="min-w-0 flex-1">
         <div className="flex flex-wrap items-start justify-between gap-x-4 gap-y-1">
           <div className="min-w-0">
-            <p className="text-[0.75rem] text-ink-muted">{line.product.categoryName}</p>
-            <h3 className="text-[0.9375rem] font-medium leading-snug text-ink">
+            <p className="note">{line.product.categoryName}</p>
+            <h3 className="mt-1 text-[1.0625rem] leading-snug text-ink">
               <Link
                 href={productHref(line.product.slug)}
                 className="underline-offset-4 hover:underline"
@@ -80,7 +80,7 @@ export function InquiryLine({
                 {line.product.name}
               </Link>
             </h3>
-            <p className="mt-0.5 font-mono text-[0.75rem] text-ink-muted">
+            <p className="figure mt-1 text-[0.75rem] text-ink-muted">
               {line.variant?.code ?? line.product.code}
             </p>
           </div>
@@ -119,7 +119,7 @@ export function InquiryLine({
                 if (form) startTransition(() => form.requestSubmit());
               }}
               className={cn(
-                "h-9 rounded-md border bg-surface-raised px-2.5 text-[0.8125rem]",
+                "h-10 border bg-surface-raised px-2.5 text-[0.875rem] focus:border-brand focus:outline-none",
                 line.needsVariantChoice
                   ? "border-critical text-critical"
                   : "border-line-strong hover:border-ink-muted",
@@ -172,7 +172,7 @@ export function InquiryLine({
               <button
                 type="button"
                 onClick={() => submitQuantity(quantity - 1)}
-                className="inline-flex size-9 items-center justify-center rounded-l-md border border-line-strong text-ink-soft hover:bg-surface-sunken hover:text-ink"
+                className="inline-flex size-10 items-center justify-center border border-line-strong text-ink-soft transition-colors hover:border-brand hover:text-brand"
               >
                 <Minus className="size-3.5" aria-hidden="true" />
                 <span className="sr-only">
@@ -188,12 +188,12 @@ export function InquiryLine({
                 value={quantity}
                 onChange={(event) => setQuantity(Number(event.target.value) || 1)}
                 onBlur={() => submitQuantity(quantity)}
-                className="h-9 w-16 border-y border-line-strong bg-surface-raised text-center text-sm tabular-nums"
+                className="figure h-10 w-16 border-y border-line-strong bg-surface-raised text-center focus:border-brand focus:outline-none"
               />
               <button
                 type="button"
                 onClick={() => submitQuantity(quantity + 1)}
-                className="inline-flex size-9 items-center justify-center rounded-r-md border border-line-strong text-ink-soft hover:bg-surface-sunken hover:text-ink"
+                className="inline-flex size-10 items-center justify-center border border-line-strong text-ink-soft transition-colors hover:border-brand hover:text-brand"
               >
                 <Plus className="size-3.5" aria-hidden="true" />
                 <span className="sr-only">

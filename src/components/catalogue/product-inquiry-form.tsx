@@ -67,11 +67,9 @@ export function ProductInquiryForm({
 
       {variants.length > 0 ? (
         <fieldset>
-          <legend className="text-sm font-medium text-ink">
+          <legend className="flex items-baseline gap-3 text-[0.875rem] font-medium text-ink">
             Choose an option
-            <span className="ml-2 font-normal text-ink-muted">
-              {variants.length} available
-            </span>
+            <span className="note">{variants.length} available</span>
           </legend>
 
           <div className="mt-3 flex flex-wrap gap-2">
@@ -93,16 +91,16 @@ export function ProductInquiryForm({
                   <label
                     htmlFor={id}
                     className={cn(
-                      "flex cursor-pointer items-center gap-2 rounded-md border px-3 py-2 text-[0.8125rem] transition-colors",
+                      "flex cursor-pointer items-center gap-2.5 border px-3.5 py-2.5 text-[0.875rem] transition-[border-color,background-color,color,transform] duration-[--duration-quick] ease-[--ease-quiet]",
                       "peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-[var(--color-focus)]",
                       active
-                        ? "border-ink bg-surface-sunken text-ink"
-                        : "border-line-strong text-ink-soft hover:border-ink-muted hover:text-ink",
+                        ? "border-brand bg-brand-wash text-ink"
+                        : "border-line-strong text-ink-soft hover:-translate-y-px hover:border-ink-muted hover:text-ink",
                     )}
                   >
                     {variant.finish?.swatchHex ? (
                       <span
-                        className="size-3.5 rounded-full border border-line-strong"
+                        className="size-3.5 border border-line-strong"
                         style={{ backgroundColor: variant.finish.swatchHex }}
                         aria-hidden="true"
                       />
@@ -115,8 +113,8 @@ export function ProductInquiryForm({
           </div>
 
           {activeVariant ? (
-            <p className="mt-3 text-[0.8125rem] text-ink-muted">
-              Product code {activeVariant.code}, {availabilityLabel(activeVariant.availability)}
+            <p className="note mt-4">
+              {activeVariant.code}, {availabilityLabel(activeVariant.availability)}
             </p>
           ) : null}
         </fieldset>
@@ -128,14 +126,14 @@ export function ProductInquiryForm({
 
       <div className="flex flex-wrap items-end gap-6">
         <div>
-          <label htmlFor="quantity" className="block text-sm font-medium text-ink">
+          <label htmlFor="quantity" className="block text-[0.875rem] font-medium text-ink">
             Quantity
           </label>
           <div className="mt-2 flex items-center">
             <button
               type="button"
               onClick={() => setQuantity((value) => Math.max(1, value - 1))}
-              className="inline-flex size-10 items-center justify-center rounded-l-md border border-line-strong text-ink-soft transition-colors hover:bg-surface-sunken hover:text-ink"
+              className="inline-flex size-11 items-center justify-center border border-line-strong text-ink-soft transition-colors hover:border-brand hover:text-brand"
             >
               <Minus className="size-4" aria-hidden="true" />
               <span className="sr-only">Decrease quantity</span>
@@ -150,12 +148,12 @@ export function ProductInquiryForm({
               onChange={(event) =>
                 setQuantity(Math.max(1, Math.min(9999, Number(event.target.value) || 1)))
               }
-              className="h-10 w-20 border-y border-line-strong bg-surface-raised text-center text-sm tabular-nums"
+              className="figure h-11 w-20 border-y border-line-strong bg-surface-raised text-center focus:border-brand focus:outline-none"
             />
             <button
               type="button"
               onClick={() => setQuantity((value) => Math.min(9999, value + 1))}
-              className="inline-flex size-10 items-center justify-center rounded-r-md border border-line-strong text-ink-soft transition-colors hover:bg-surface-sunken hover:text-ink"
+              className="inline-flex size-11 items-center justify-center border border-line-strong text-ink-soft transition-colors hover:border-brand hover:text-brand"
             >
               <Plus className="size-4" aria-hidden="true" />
               <span className="sr-only">Increase quantity</span>
@@ -166,9 +164,9 @@ export function ProductInquiryForm({
       </div>
 
       <div>
-        <label htmlFor="note" className="block text-sm font-medium text-ink">
+        <label htmlFor="note" className="flex items-baseline gap-3 text-[0.875rem] font-medium text-ink">
           Note for this product
-          <span className="ml-2 font-normal text-ink-muted">Optional</span>
+          <span className="note">Optional</span>
         </label>
         <textarea
           id="note"
@@ -176,7 +174,7 @@ export function ProductInquiryForm({
           rows={2}
           maxLength={500}
           placeholder="Door thickness, handing, or anything else our team should know."
-          className="mt-2 w-full rounded-md border border-line-strong bg-surface-raised px-3 py-2.5 text-sm leading-relaxed hover:border-ink-muted"
+          className="mt-2 w-full border border-line-strong bg-surface-raised px-3.5 py-3 text-[0.9375rem] leading-relaxed transition-[border-color,box-shadow] duration-[--duration-quick] hover:border-ink-muted focus:border-brand focus:shadow-[0_0_0_3px_var(--color-brand-wash)] focus:outline-none"
         />
       </div>
 

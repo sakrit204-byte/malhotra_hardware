@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RequestResetPage() {
   return (
     <>
-      <h1 className="text-3xl">Forgotten your password</h1>
+      <h1 className="text-[2rem] leading-[1.1]">Forgotten your password</h1>
       <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
         Give us the address on your account and we will send a link to set a new password.
         The link works once and lasts an hour.

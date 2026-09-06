@@ -34,7 +34,7 @@ export function Pagination({
         <Link
           href={pageHref(query, page - 1)}
           rel="prev"
-          className="inline-flex h-9 items-center gap-1 rounded-md px-3 text-sm text-ink-soft transition-colors hover:bg-surface-sunken hover:text-ink"
+          className="inline-flex h-10 items-center gap-1 px-3 text-sm text-ink-soft transition-colors hover:text-brand"
         >
           <ChevronLeft className="size-4" aria-hidden="true" />
           Previous
@@ -50,17 +50,17 @@ export function Pagination({
             <li key={value} className="flex items-center gap-1">
               {gap ? (
                 <span className="px-1 text-ink-muted" aria-hidden="true">
-                  and
+                  &hellip;
                 </span>
               ) : null}
               <Link
                 href={pageHref(query, value)}
                 aria-current={value === page ? "page" : undefined}
                 className={cn(
-                  "inline-flex size-9 items-center justify-center rounded-md text-sm tabular-nums transition-colors",
+                  "figure inline-flex size-10 items-center justify-center border transition-colors duration-[--duration-quick]",
                   value === page
-                    ? "bg-ink text-ink-inverse"
-                    : "text-ink-soft hover:bg-surface-sunken hover:text-ink",
+                    ? "border-brand bg-brand text-white"
+                    : "border-transparent text-ink-soft hover:border-line-strong hover:text-ink",
                 )}
               >
                 {value}
@@ -77,7 +77,7 @@ export function Pagination({
         <Link
           href={pageHref(query, page + 1)}
           rel="next"
-          className="inline-flex h-9 items-center gap-1 rounded-md px-3 text-sm text-ink-soft transition-colors hover:bg-surface-sunken hover:text-ink"
+          className="inline-flex h-10 items-center gap-1 px-3 text-sm text-ink-soft transition-colors hover:text-brand"
         >
           Next
           <ChevronRight className="size-4" aria-hidden="true" />

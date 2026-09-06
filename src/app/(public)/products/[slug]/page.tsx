@@ -248,8 +248,11 @@ export default async function ProductDetailPage({
               <h3 className="note mb-3">Product details</h3>
               <dl className="divide-y divide-line border-y border-line">
                 {attributes.map((attribute) => (
-                  <div key={attribute.label} className="flex gap-4 py-2.5 text-sm">
-                    <dt className="w-40 shrink-0 text-ink-muted">{attribute.label}</dt>
+                  <div
+                    key={attribute.label}
+                    className="flex gap-4 py-3 text-[0.9375rem] transition-colors hover:bg-surface-sunken"
+                  >
+                    <dt className="w-44 shrink-0 text-ink-muted">{attribute.label}</dt>
                     <dd className="figure text-ink">{attribute.value}</dd>
                   </div>
                 ))}
@@ -261,11 +264,14 @@ export default async function ProductDetailPage({
                 <h3 className="note mb-3">{group.group}</h3>
                 <dl className="divide-y divide-line border-y border-line">
                   {group.items.map((item) => (
-                    <div key={item.id} className="flex gap-4 py-2.5 text-sm">
-                      <dt className="w-40 shrink-0 text-ink-muted">
+                    <div
+                      key={item.id}
+                      className="flex gap-4 py-3 text-[0.9375rem] transition-colors hover:bg-surface-sunken"
+                    >
+                      <dt className="w-44 shrink-0 text-ink-muted">
                         {item.definition.label}
                       </dt>
-                      <dd className="text-ink">
+                      <dd className="figure text-ink">
                         {specificationValue(item.value, item.definition.unit)}
                       </dd>
                     </div>
@@ -292,7 +298,7 @@ export default async function ProductDetailPage({
         {/* --------------------------------------------------- variants */}
         {product.variants.length > 1 ? (
           <section className="mt-14 border-t border-line pt-10" aria-labelledby="variants">
-            <h2 id="variants" className="text-2xl">
+            <h2 id="variants" className="note">
               Available options
             </h2>
             <div className="mt-6 overflow-x-auto">
@@ -301,31 +307,31 @@ export default async function ProductDetailPage({
                   Options available for {product.name}
                 </caption>
                 <thead>
-                  <tr className="border-y border-line text-left text-[0.8125rem] text-ink-muted">
-                    <th scope="col" className="py-2.5 pr-4 font-medium">
+                  <tr className="note border-y border-line text-left">
+                    <th scope="col" className="py-3 pr-4 font-medium">
                       Option
                     </th>
-                    <th scope="col" className="py-2.5 pr-4 font-medium">
+                    <th scope="col" className="py-3 pr-4 font-medium">
                       Product code
                     </th>
-                    <th scope="col" className="py-2.5 pr-4 font-medium">
+                    <th scope="col" className="py-3 pr-4 font-medium">
                       Finish
                     </th>
-                    <th scope="col" className="py-2.5 font-medium">
+                    <th scope="col" className="py-3 font-medium">
                       Availability
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-line">
                   {product.variants.map((variant) => (
-                    <tr key={variant.id}>
-                      <th scope="row" className="py-2.5 pr-4 text-left font-normal text-ink">
+                    <tr key={variant.id} className="transition-colors hover:bg-surface-sunken">
+                      <th scope="row" className="py-3 pr-4 text-left font-normal text-ink">
                         {variant.name}
                       </th>
-                      <td className="py-2.5 pr-4 font-mono text-[0.8125rem] text-ink-muted">
+                      <td className="figure py-3 pr-4 text-ink-muted">
                         {variant.code}
                       </td>
-                      <td className="py-2.5 pr-4 text-ink-soft">
+                      <td className="py-3 pr-4 text-ink-soft">
                         {variant.finish?.name ?? "As shown"}
                       </td>
                       <td className="py-2.5">

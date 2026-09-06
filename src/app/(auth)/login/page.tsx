@@ -22,7 +22,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/login">) {
 
   return (
     <>
-      <h1 className="text-3xl">Sign in</h1>
+      <h1 className="text-[2rem] leading-[1.1]">Sign in</h1>
       <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
         Your inquiries, their replies and every summary in one place. You do not need an
         account to send an inquiry.

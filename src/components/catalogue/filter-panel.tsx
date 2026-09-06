@@ -67,10 +67,10 @@ function FilterGroup({
         aria-controls={panelId}
         className="flex w-full items-center justify-between gap-3 py-4 text-left"
       >
-        <span className="text-[0.9375rem] text-ink">{legend}</span>
+        <span className="text-[0.9375rem] font-medium text-ink">{legend}</span>
         <span className="flex items-center gap-2">
           {selected.length > 0 ? (
-            <span className="rounded-sm bg-brand px-1.5 text-[0.6875rem] font-medium leading-5 text-white">
+            <span className="bg-brand px-1.5 font-mono text-[0.6875rem] font-medium leading-5 text-white">
               {selected.length}
             </span>
           ) : null}
@@ -108,17 +108,17 @@ function FilterGroup({
                       name={name}
                       value={option.slug}
                       defaultChecked={selected.includes(option.slug)}
-                      className="size-4 shrink-0 accent-[var(--color-ink)]"
+                      className="size-4 shrink-0"
                     />
                     {option.swatchHex ? (
                       <span
-                        className="size-3.5 shrink-0 rounded-full border border-line-strong"
+                        className="size-3.5 shrink-0 border border-line-strong"
                         style={{ backgroundColor: option.swatchHex }}
                         aria-hidden="true"
                       />
                     ) : null}
                     <span className="flex-1">{option.name}</span>
-                    <span className="text-[0.8125rem] tabular-nums text-ink-muted">
+                    <span className="figure text-[0.75rem] text-ink-muted">
                       {option.count}
                     </span>
                   </label>

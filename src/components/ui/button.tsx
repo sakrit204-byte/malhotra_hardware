@@ -31,8 +31,7 @@ const button = cva(
           "border border-line-strong bg-surface-raised text-ink hover:border-ink-muted hover:bg-surface-sunken",
         brass: "bg-brass text-white hover:bg-brass-strong",
         brand: "bg-brand text-white hover:bg-brand-strong",
-        onPhoto:
-          "border border-white/60 bg-white/10 text-white backdrop-blur-[2px] hover:bg-white/20",
+        onPhoto: "border border-white/70 text-white hover:bg-white hover:text-ink",
         ghost: "text-ink hover:bg-surface-sunken",
         quiet: "text-ink-soft underline underline-offset-4 hover:text-ink",
         danger: "bg-critical text-white hover:brightness-110",

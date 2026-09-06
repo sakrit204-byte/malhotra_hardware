@@ -52,7 +52,7 @@ export function Field({
       <label
         htmlFor={id}
         className={cn(
-          "block text-[0.8125rem] font-medium text-ink",
+          "block text-[0.875rem] font-medium text-ink",
           hideLabel && "sr-only",
         )}
       >
@@ -98,22 +98,23 @@ export function Field({
 }
 
 const controlStyles = [
-  "w-full rounded-md border border-line-strong bg-surface-raised px-3 text-sm text-ink",
+  "w-full border border-line-strong bg-surface-raised px-3.5 text-[0.9375rem] text-ink",
   "placeholder:text-ink-muted",
-  "transition-colors duration-[--duration-quick] ease-[--ease-quiet]",
+  "transition-[border-color,box-shadow,background-color] duration-[--duration-quick] ease-[--ease-quiet]",
   "hover:border-ink-muted",
-  "aria-[invalid=true]:border-critical",
+  "focus:border-brand focus:shadow-[0_0_0_3px_var(--color-brand-wash)] focus:outline-none",
+  "aria-[invalid=true]:border-critical aria-[invalid=true]:focus:shadow-[0_0_0_3px_var(--color-critical-wash)]",
   "disabled:cursor-not-allowed disabled:bg-surface-sunken disabled:text-ink-muted",
 ];
 
 export function Input({ className, ...props }: ComponentProps<"input">) {
-  return <input className={cn(controlStyles, "h-10", className)} {...props} />;
+  return <input className={cn(controlStyles, "h-11", className)} {...props} />;
 }
 
 export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
   return (
     <textarea
-      className={cn(controlStyles, "min-h-28 resize-y py-2.5 leading-relaxed", className)}
+      className={cn(controlStyles, "min-h-28 resize-y py-3 leading-relaxed", className)}
       {...props}
     />
   );
@@ -121,7 +122,7 @@ export function Textarea({ className, ...props }: ComponentProps<"textarea">) {
 
 export function Select({ className, children, ...props }: ComponentProps<"select">) {
   return (
-    <select className={cn(controlStyles, "h-10 pr-8", className)} {...props}>
+    <select className={cn(controlStyles, "h-11 pr-9", className)} {...props}>
       {children}
     </select>
   );

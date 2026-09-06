@@ -25,14 +25,14 @@ export async function SiteFooter() {
 
   return (
     <footer className="mt-auto border-t border-line bg-surface-sunken">
-      <Container width="wide" className="py-14">
+      <Container width="wide" className="py-16 lg:py-20">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="flex items-center gap-2.5">
-              <Monogram className="size-9" />
-              <span className="font-display text-xl text-ink">{site.name}</span>
+            <p className="flex items-center gap-3">
+              <Monogram className="size-11" />
+              <span className="font-display text-2xl text-ink">{site.name}</span>
             </p>
-            <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-soft">
+            <p className="mt-4 max-w-xs text-[0.9375rem] leading-relaxed text-ink-soft">
               Architectural and home hardware supplied across the Kathmandu valley.
             </p>
             <address className="mt-4 space-y-0.5 text-sm not-italic text-ink-soft">
@@ -45,13 +45,13 @@ export async function SiteFooter() {
           </div>
 
           <nav aria-label="Catalogue">
-            <h2 className="eyebrow">Catalogue</h2>
+            <h2 className="note border-t border-line-strong pt-3">Catalogue</h2>
             <ul className="mt-4 space-y-2.5">
               {catalogueLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ink-soft transition-colors hover:text-ink"
+                    className="text-[0.9375rem] text-ink-soft underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-[--duration-quick] hover:text-brand hover:decoration-brand"
                   >
                     {link.label}
                   </Link>
@@ -61,13 +61,13 @@ export async function SiteFooter() {
           </nav>
 
           <nav aria-label="Help">
-            <h2 className="eyebrow">Inquiries</h2>
+            <h2 className="note border-t border-line-strong pt-3">Inquiries</h2>
             <ul className="mt-4 space-y-2.5">
               {helpLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ink-soft transition-colors hover:text-ink"
+                    className="text-[0.9375rem] text-ink-soft underline decoration-transparent underline-offset-4 transition-[color,text-decoration-color] duration-[--duration-quick] hover:text-brand hover:decoration-brand"
                   >
                     {link.label}
                   </Link>
@@ -77,7 +77,7 @@ export async function SiteFooter() {
           </nav>
 
           <div>
-            <h2 className="eyebrow">Contact</h2>
+            <h2 className="note border-t border-line-strong pt-3">Contact</h2>
             <ul className="mt-4 space-y-2.5 text-sm text-ink-soft">
               <li>
                 <a

@@ -18,7 +18,7 @@ export default async function RegisterPage() {
 
   return (
     <>
-      <h1 className="text-3xl">Create an account</h1>
+      <h1 className="text-[2rem] leading-[1.1]">Create an account</h1>
       <p className="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
         An account keeps your inquiries, replies and summaries together. Anything you have
         already sent from the same address joins them once you confirm it.

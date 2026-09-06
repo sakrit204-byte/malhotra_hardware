@@ -65,7 +65,7 @@ export function SiteHeader({
               <span className="hidden sm:inline">Inquiry</span>
               {inquiryCount > 0 ? (
                 <span
-                  className="min-w-5 rounded-sm bg-brand px-1.5 text-center text-xs font-medium leading-5 text-white"
+                  className="min-w-5 bg-brand px-1.5 text-center font-mono text-[0.6875rem] font-medium leading-5 text-white"
                   aria-label={`${inquiryCount} products selected`}
                 >
                   {inquiryCount}

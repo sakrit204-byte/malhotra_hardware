@@ -58,7 +58,7 @@ export default async function InquiryPage() {
       {resolved.dropped.length > 0 ? (
         <div
           role="status"
-          className="mt-8 rounded-md border border-caution/30 bg-caution-wash px-4 py-3 text-sm text-ink-soft"
+          className="mt-8 border-l-2 border-caution bg-caution-wash px-4 py-3 text-[0.9375rem] text-ink-soft"
         >
           {resolved.dropped.length === 1
             ? "One product has been removed from your inquiry because it is no longer available."
@@ -89,10 +89,10 @@ export default async function InquiryPage() {
           <div>
             <section aria-labelledby="selected-products">
               <div className="flex items-end justify-between gap-4">
-                <h2 id="selected-products" className="text-xl">
+                <h2 id="selected-products" className="text-2xl">
                   Selected products
                 </h2>
-                <p className="text-[0.8125rem] text-ink-muted">
+                <p className="note">
                   {resolved.itemCount} {resolved.itemCount === 1 ? "product" : "products"},{" "}
                   {resolved.totalQuantity} in total
                 </p>
@@ -131,28 +131,30 @@ export default async function InquiryPage() {
           {/* ------------------------------------------------------- aside */}
           <aside className="lg:sticky lg:top-24 lg:self-start">
 
-            <div className="rounded-lg border border-line bg-surface-raised p-5">
-              <h2 className="text-base font-medium text-ink">What happens next</h2>
-              <ol className="mt-4 space-y-4 text-[0.8125rem] leading-relaxed text-ink-soft">
-                <li>
-                  <span className="block font-medium text-ink">You send the inquiry</span>
-                  We give you a reference number immediately and email you a summary.
-                </li>
-                <li>
-                  <span className="block font-medium text-ink">Our team reviews it</span>
-                  We confirm availability, lead times and pricing, usually within one
-                  working day.
-                </li>
-                <li>
-                  <span className="block font-medium text-ink">You hear back in writing</span>
-                  Our reply arrives by email and you can answer in the same thread.
-                </li>
+            <div className="border-t border-ink pt-3">
+              <h2 className="note">What happens next</h2>
+              <ol className="mt-5 divide-y divide-line">
+                {[
+                  ["You send the inquiry", "We give you a reference number immediately and email you a summary."],
+                  ["Our team reviews it", "We confirm availability and lead times, usually within one working day."],
+                  ["You hear back in writing", "Our reply arrives by email and you can answer in the same thread."],
+                ].map(([title, body], index) => (
+                  <li key={title} className="flex gap-4 py-4">
+                    <span className="font-display text-2xl leading-none text-brand">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="text-[0.875rem] leading-relaxed text-ink-soft">
+                      <span className="block text-[0.9375rem] font-medium text-ink">{title}</span>
+                      {body}
+                    </span>
+                  </li>
+                ))}
               </ol>
             </div>
 
-            <div className="mt-5 rounded-lg border border-line bg-surface-raised p-5">
-              <h2 className="text-base font-medium text-ink">Prefer to talk</h2>
-              <ul className="mt-3 space-y-2 text-[0.8125rem]">
+            <div className="mt-8 border-t border-ink pt-3">
+              <h2 className="note">Prefer to talk</h2>
+              <ul className="mt-4 space-y-2.5 text-[0.9375rem]">
                 <li>
                   <a
                     href={`tel:${contact.phone.replace(/\s+/g, "")}`}
@@ -178,16 +180,16 @@ export default async function InquiryPage() {
             </div>
 
             {!session ? (
-              <div className="mt-5 rounded-lg border border-line bg-surface-sunken p-5">
-                <h2 className="text-base font-medium text-ink">Have an account</h2>
-                <p className="mt-2 text-[0.8125rem] leading-relaxed text-ink-soft">
+              <div className="mt-8 border-t border-ink pt-3">
+                <h2 className="note">Have an account</h2>
+                <p className="mt-3 text-[0.875rem] leading-relaxed text-ink-soft">
                   Signing in keeps every inquiry in one place, but it is not required. You
                   can send this now and create an account later.
                 </p>
                 <p className="mt-3">
                   <Link
                     href="/login?next=/inquiry"
-                    className="text-[0.8125rem] text-ink underline underline-offset-4"
+                    className="text-[0.9375rem] text-brand underline underline-offset-4"
                   >
                     Sign in
                   </Link>
