@@ -105,6 +105,50 @@ export async function deletePrivateFile(storagePath: string): Promise<void> {
   await unlink(resolveWithin(privateRoot, storagePath)).catch(() => undefined);
 }
 
+/*
+  The largest slot any photograph is drawn into is a little under 1500 pixels
+  wide, so anything past 2000 is weight nobody sees: it costs the optimiser a
+  decode of every pixel on every size it produces, and it costs the disk. A
+  photograph straight off a phone is routinely four times that.
+
+  Only the publicly served product imagery is touched. A file a customer
+  attached to an inquiry is evidence and is stored exactly as it arrived.
+*/
+const MAX_IMAGE_EDGE = 2000;
+const IMAGE_QUALITY = 80;
+
+async function shrinkIfPhotograph(content: Buffer, mimeType: string): Promise<Buffer> {
+  if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return content;
+
+  try {
+    const { default: sharp } = await import("sharp");
+    const pipeline = sharp(content, { failOn: "none" })
+      .rotate()
+      .resize({
+        width: MAX_IMAGE_EDGE,
+        height: MAX_IMAGE_EDGE,
+        fit: "inside",
+        withoutEnlargement: true,
+      });
+
+    const shrunk =
+      mimeType === "image/png"
+        ? await pipeline.png({ compressionLevel: 9 }).toBuffer()
+        : mimeType === "image/webp"
+          ? await pipeline.webp({ quality: IMAGE_QUALITY }).toBuffer()
+          : await pipeline
+              .jpeg({ quality: IMAGE_QUALITY, mozjpeg: true, progressive: true })
+              .toBuffer();
+
+    // Never store a file that came out bigger than the one that arrived.
+    return shrunk.length < content.length ? shrunk : content;
+  } catch {
+    // A file sharp cannot read is stored as it arrived. Refusing an upload
+    // over a resize would be the wrong trade.
+    return content;
+  }
+}
+
 /** Writes a file into the publicly served uploads area, for product imagery. */
 export async function savePublicFile(input: {
   folder: string;
@@ -116,11 +160,13 @@ export async function savePublicFile(input: {
   const storedName = `${randomUUID()}${extensionFor(input.fileName, input.mimeType)}`;
   const relative = path.posix.join(folder, storedName);
 
+  const content = await shrinkIfPhotograph(input.content, input.mimeType);
+
   const target = resolveWithin(publicRoot, relative);
   await mkdir(path.dirname(target), { recursive: true });
-  await writeFile(target, input.content);
+  await writeFile(target, content);
 
-  return { url: `/uploads/${relative}`, fileSize: input.content.byteLength };
+  return { url: `/uploads/${relative}`, fileSize: content.byteLength };
 }
 
 /**

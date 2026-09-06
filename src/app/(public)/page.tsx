@@ -56,7 +56,7 @@ export default async function HomePage() {
     administrator platform. Until somebody has arranged it, the flags on the
     products themselves stand in, so a fresh install still has a home page.
   */
-  const [categories, popular, featured] = await Promise.all([
+  const [categories, popular, featured, hotspotProducts] = await Promise.all([
     showcase.categories.length > 0
       ? listCategoriesInOrder(showcase.categories).then((rows) => rows.slice(0, 5))
       : listFeaturedCategories(5),
@@ -66,6 +66,13 @@ export default async function HomePage() {
     showcase.featured.length > 0
       ? listProductsInOrder(showcase.featured).then((rows) => rows.slice(0, 3))
       : listProductsByFlag("isFeatured", 3),
+
+    /*
+      Each point marked on the photograph names a product by its code. This
+      only needs the hero, which is already in hand, so it is fetched beside
+      the showcase rather than waiting for it: one round trip instead of two.
+    */
+    listProductsByCodes(hero.hotspots.map((hotspot) => hotspot.code)),
   ]);
 
   const heroImage = imageUrl(hero.image);
@@ -86,12 +93,7 @@ export default async function HomePage() {
       }
     : null;
 
-  // Each point marked on the photograph names a product by its code. Any point
-  // whose product is missing or unpublished is simply not drawn.
-  const hotspotProducts = await listProductsByCodes(
-    hero.hotspots.map((hotspot) => hotspot.code),
-  );
-
+  // Any point whose product is missing or unpublished is simply not drawn.
   const hotspotsByCode = new Map(
     hotspotProducts.map((product) => [product.code, product]),
   );

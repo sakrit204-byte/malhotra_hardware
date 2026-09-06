@@ -23,7 +23,8 @@
     "check:migrations": "tsx scripts/check-migrations.ts",
     "verify:auth": "node --conditions=react-server --import tsx scripts/verify-auth.ts",
     "verify:catalogue": "node --conditions=react-server --import tsx scripts/verify-catalogue.ts",
-    "verify": "npm run verify:inquiry && npm run verify:auth && npm run verify:catalogue"
+    "verify": "npm run verify:inquiry && npm run verify:auth && npm run verify:catalogue",
+    "images:optimise": "node scripts/optimise-images.mjs"
   },
   "dependencies": {
     "@noble/hashes": "^2.4.0",

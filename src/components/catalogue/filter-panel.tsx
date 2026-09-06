@@ -5,10 +5,10 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { availabilityLabel } from "@/lib/catalogue";
+
 import { cn } from "@/lib/cn";
 import type { CatalogueFacets } from "@/server/repositories/catalogue";
-import { SORT_OPTIONS, type CatalogueQuery } from "@/server/validation/catalogue";
+import { availabilityLabel, SORT_OPTIONS, type CatalogueQuery } from "@/lib/catalogue";
 
 /**
  * Catalogue filters.

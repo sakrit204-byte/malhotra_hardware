@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 import { cn } from "@/lib/cn";
-import { pageHref, type CatalogueQuery } from "@/server/validation/catalogue";
+import { pageHref, type CatalogueQuery } from "@/lib/catalogue";
 
 /**
  * Catalogue pagination.
