@@ -20,6 +20,7 @@ import {
   listProductsInOrder,
 } from "@/server/repositories/catalogue";
 import {
+  getAboutContent,
   getContactContent,
   getHeroContent,
   getInspirationContent,
@@ -37,9 +38,10 @@ import {
  */
 
 export default async function HomePage() {
-  const [hero, showcase, reasons, inspiration, contact, summary, index] =
+  const [hero, about, showcase, reasons, inspiration, contact, summary, index] =
     await Promise.all([
       getHeroContent(),
+      getAboutContent(),
       getShowcaseContent(),
       getReasonsContent(),
       getInspirationContent(),
@@ -132,6 +134,38 @@ export default async function HomePage() {
         hotspots={hotspots}
       />
 
+      {/* --------------------------------------------------- what we hold */}
+      <section aria-label="The range in figures" className="border-b border-line">
+        <Container width="wide">
+          <dl className="stagger grid grid-cols-2 divide-line lg:grid-cols-4 lg:divide-x">
+            {[
+              { value: summary.products, label: "products stocked" },
+              { value: summary.categories, label: "categories" },
+              { value: summary.finishes, label: "finishes" },
+              { value: summary.brands, label: "brands carried" },
+            ].map((figure, position) => (
+              <div
+                key={figure.label}
+                className={cn(
+                  "py-10 lg:py-14",
+                  position % 2 === 1 && "border-l border-line lg:border-l-0",
+                  position > 1 && "border-t border-line lg:border-t-0",
+                  // The first figure keeps the page margin so the band starts
+                  // on the same line as every other section.
+                  position % 2 === 1 && "ps-6 lg:ps-0",
+                  position > 0 && "lg:ps-10",
+                )}
+              >
+                <dd className="font-display text-[clamp(3rem,6vw,5.5rem)] leading-[0.85] text-brand">
+                  {figure.value}
+                </dd>
+                <dt className="note mt-4">{figure.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </Container>
+      </section>
+
       {/* ---------------------------------------------- 02  where to start */}
       {lead ? (
         <Section className="sheet">
@@ -208,7 +242,7 @@ export default async function HomePage() {
                         className={cn(
                           "mt-4 text-ink underline decoration-transparent underline-offset-[6px]",
                           "transition-[transform,color,text-decoration-color] duration-[--duration-settled] ease-[--ease-quiet]",
-                          "group-hover:translate-x-1 group-hover:text-brick group-hover:decoration-brick",
+                          "group-hover:translate-x-1 group-hover:text-brand group-hover:decoration-brand",
                           isLead ? "text-2xl lg:text-[2rem]" : "text-lg",
                         )}
                       >
@@ -235,7 +269,7 @@ export default async function HomePage() {
                         href={`/products?category=${entry.slug}`}
                         className="group flex items-baseline justify-between gap-3 py-2.5"
                       >
-                        <span className="min-w-0 truncate text-[0.9375rem] text-ink-soft transition-colors group-hover:text-brick">
+                        <span className="min-w-0 truncate text-[0.9375rem] text-ink-soft transition-colors group-hover:text-brand">
                           {entry.name}
                         </span>
                         <span className="note shrink-0">
@@ -281,9 +315,49 @@ export default async function HomePage() {
         </Section>
       ) : null}
 
+      {/* --------------------------------------------------- who we are */}
+      {about.paragraphs.length > 0 ? (
+        <Section className="sheet">
+          <Container width="wide" className="relative">
+            <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+              <div className="reveal">
+                <p className="note border-t border-ink pt-3">The company</p>
+                <h2 className="mt-8 max-w-[14ch] text-title text-ink">
+                  {about.headline}
+                </h2>
+                <p className="mt-8 max-w-xl text-[1.125rem] leading-relaxed text-ink-soft">
+                  {about.paragraphs[0]}
+                </p>
+
+                <div className="mt-10">
+                  <Button asChild size="lg" variant="secondary">
+                    <Link href="/about">
+                      More about us
+                      <ArrowRight className="size-4" aria-hidden="true" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="reveal">
+                <Plate className="aspect-4/3 lg:aspect-square">
+                  <Image
+                    src={imageUrl(about.image) ?? ""}
+                    alt=""
+                    fill
+                    sizes="(min-width: 1024px) 45vw, 100vw"
+                    className="drift object-cover"
+                  />
+                </Plate>
+              </div>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
       {/* ------------------------------------------------------ 04  reasons */}
       {reasons.items.length > 0 ? (
-        <Section tone="brick" className="sheet">
+        <Section tone="brand" className="sheet">
           <Container width="wide" className="relative">
             <TitleBlock
               className="reveal reveal-lead"
@@ -306,7 +380,7 @@ export default async function HomePage() {
               {reasons.items.map((item, index) => (
                 <div
                   key={item.title}
-                  className="group relative flex flex-col bg-brick p-7 transition-colors duration-500 ease-[--ease-quiet] hover:bg-brick-deep lg:p-9"
+                  className="group relative flex flex-col bg-brand p-8 transition-colors duration-500 ease-[--ease-quiet] hover:bg-brand-deep lg:p-10"
                 >
                   <p className="font-display text-[3.25rem] leading-[0.8] text-white/40 transition-[transform,color] duration-500 ease-[--ease-quiet] group-hover:-translate-y-1 group-hover:text-white/85">
                     {String(index + 1).padStart(2, "0")}

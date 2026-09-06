@@ -101,7 +101,7 @@ export function Hero({
           className="rise pointer-events-auto mt-9 flex flex-wrap gap-3"
           style={{ animationDelay: "300ms" }}
         >
-          <Button asChild size="lg" variant="brick">
+          <Button asChild size="lg" variant="brand">
             <Link href={content.primaryHref}>
               {content.primaryLabel}
               <ArrowRight

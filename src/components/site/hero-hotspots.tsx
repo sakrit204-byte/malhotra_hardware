@@ -178,7 +178,7 @@ export function HeroHotspots({
                   ) : null}
 
                   <div className="min-w-0">
-                    <p className="text-[0.625rem] uppercase tracking-[0.09em] text-brick-strong">
+                    <p className="text-[0.625rem] uppercase tracking-[0.09em] text-brand">
                       {hotspot.label}
                     </p>
                     <p className="mt-1 text-[0.8125rem] font-medium leading-snug text-ink">

@@ -566,15 +566,16 @@ export async function listProductsByFlag(
  * copy, so the page can never claim a catalogue that is not there.
  */
 export async function getCatalogueSummary() {
-  const [products, categories, finishes] = await Promise.all([
+  const [products, categories, finishes, brands] = await Promise.all([
     prisma.product.count({ where: visible }),
     prisma.category.count({
       where: { parentId: null, isHidden: false, deletedAt: null },
     }),
     prisma.finish.count({ where: { isHidden: false, deletedAt: null } }),
+    prisma.brand.count({ where: { isHidden: false, deletedAt: null } }),
   ]);
 
-  return { products, categories, finishes };
+  return { products, categories, finishes, brands };
 }
 
 /**

@@ -96,7 +96,7 @@ export function TitleBlock({
         {action ? <div className="ms-auto shrink-0">{action}</div> : null}
       </div>
 
-      <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-16">
+      <div className="mt-10 flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-20">
         <Heading
           className={cn(
             "max-w-[16ch] text-title",
@@ -109,7 +109,7 @@ export function TitleBlock({
         {description ? (
           <p
             className={cn(
-              "max-w-md text-[0.9375rem] leading-relaxed lg:pb-2",
+              "max-w-md text-[1.0625rem] leading-relaxed lg:pb-2",
               inverse ? "text-ink-inverse-soft" : "text-ink-soft",
             )}
           >

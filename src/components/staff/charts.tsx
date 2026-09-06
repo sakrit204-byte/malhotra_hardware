@@ -55,7 +55,7 @@ export function BarSeries({
               <div
                 className={cn(
                   "w-full transition-[height] duration-[--duration-settled] ease-[--ease-quiet]",
-                  bar.highlight ? "bg-brick" : "bg-ink/75",
+                  bar.highlight ? "bg-brand" : "bg-ink/75",
                 )}
                 style={{ height: `${share * 100}%` }}
               />

@@ -21,11 +21,11 @@ const button = cva(
   {
     variants: {
       variant: {
-        primary: "bg-ink text-ink-inverse hover:bg-ink-soft",
+        primary: "bg-brand text-white hover:bg-brand-strong",
         secondary:
           "border border-line-strong bg-surface-raised text-ink hover:border-ink-muted hover:bg-surface-sunken",
         brass: "bg-brass text-white hover:bg-brass-strong",
-        brick: "bg-brick text-white hover:bg-brick-strong",
+        brand: "bg-brand text-white hover:bg-brand-strong",
         onPhoto:
           "border border-white/60 bg-white/10 text-white backdrop-blur-[2px] hover:bg-white/20",
         ghost: "text-ink hover:bg-surface-sunken",

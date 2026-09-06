@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { AccountMenu } from "@/components/site/account-menu";
 import { MobileNav } from "@/components/site/mobile-nav";
+import { Monogram } from "@/components/site/monogram";
 import { NavLink } from "@/components/site/nav-link";
 import { Container } from "@/components/ui/container";
 import { primaryNavigation, site } from "@/lib/site";
@@ -25,12 +26,12 @@ export function SiteHeader({
   return (
     <header className="site-header sticky top-0 z-30 border-b border-line bg-surface/90 backdrop-blur-md">
       <Container width="wide">
-        <div className="flex h-16 items-center gap-6">
-          <Link
-            href="/"
-            className="shrink-0 font-display text-lg leading-none tracking-tight text-ink"
-          >
-            {site.name}
+        <div className="flex h-[4.5rem] items-center gap-7">
+          <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+            <Monogram className="size-8 transition-transform duration-[--duration-settled] ease-[--ease-quiet] group-hover:scale-105" />
+            <span className="font-display text-[1.375rem] leading-none tracking-tight text-ink">
+              {site.name}
+            </span>
             <span className="sr-only">, home page</span>
           </Link>
 
@@ -80,7 +81,7 @@ export function SiteHeader({
               <span className="hidden sm:inline">Inquiry</span>
               {inquiryCount > 0 ? (
                 <span
-                  className="min-w-5 rounded-sm bg-brick px-1.5 text-center text-xs font-medium leading-5 text-white"
+                  className="min-w-5 rounded-sm bg-brand px-1.5 text-center text-xs font-medium leading-5 text-white"
                   aria-label={`${inquiryCount} products selected`}
                 >
                   {inquiryCount}

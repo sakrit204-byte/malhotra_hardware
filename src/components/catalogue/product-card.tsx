@@ -36,7 +36,7 @@ export function ProductCard({
       {/* The code is lettered above the plate, where a drawing numbers a
           detail. It is also the thing a customer reads out on the telephone,
           so it earns its place at the top of the card. */}
-      <p className="note mb-3 flex items-center justify-between gap-3 border-t border-line pt-2.5 transition-colors duration-[--duration-settled] group-hover:border-brick">
+      <p className="note mb-3 flex items-center justify-between gap-3 border-t border-line pt-2.5 transition-colors duration-[--duration-settled] group-hover:border-brand">
         <span className="truncate">{product.code}</span>
         {product.availability !== "IN_STOCK" ? (
           <span className="shrink-0 text-brick">
@@ -96,7 +96,7 @@ export function ProductCard({
         <h3 className="text-[1.0625rem] leading-snug text-ink">
           <Link
             href={productHref(product.slug)}
-            className="underline decoration-transparent underline-offset-[6px] transition-[color,text-decoration-color] duration-[--duration-settled] ease-[--ease-quiet] after:absolute after:inset-0 group-hover:text-brick group-hover:decoration-brick"
+            className="underline decoration-transparent underline-offset-[6px] transition-[color,text-decoration-color] duration-[--duration-settled] ease-[--ease-quiet] after:absolute after:inset-0 group-hover:text-brand group-hover:decoration-brand"
           >
             {product.name}
           </Link>

@@ -79,17 +79,17 @@ export function Section({
   tone = "surface",
   ...props
 }: ComponentProps<"section"> & {
-  tone?: "surface" | "sunken" | "inverse" | "brick";
+  tone?: "surface" | "sunken" | "inverse" | "brand";
 }) {
   return (
     <section
       className={cn(
-        "py-20 sm:py-28",
+        "py-24 sm:py-32 lg:py-40",
         tone === "sunken" && "bg-surface-sunken",
         tone === "inverse" && "on-inverse bg-surface-inverse text-ink-inverse",
         // One band of colour on the page. It is the thing that stops a site
         // made of paper and hairlines reading as timid.
-        tone === "brick" && "on-brick",
+        tone === "brand" && "on-brand",
         className,
       )}
       {...props}

@@ -70,7 +70,7 @@ function FilterGroup({
         <span className="text-[0.9375rem] text-ink">{legend}</span>
         <span className="flex items-center gap-2">
           {selected.length > 0 ? (
-            <span className="rounded-sm bg-brick px-1.5 text-[0.6875rem] font-medium leading-5 text-white">
+            <span className="rounded-sm bg-brand px-1.5 text-[0.6875rem] font-medium leading-5 text-white">
               {selected.length}
             </span>
           ) : null}

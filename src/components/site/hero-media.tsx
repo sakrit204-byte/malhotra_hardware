@@ -190,7 +190,7 @@ export function HeroMedia({
               />
             </div>
             <div className="border-t border-line px-4 py-3">
-              <p className="text-[0.6875rem] uppercase tracking-[0.09em] text-brick-strong">
+              <p className="text-[0.6875rem] uppercase tracking-[0.09em] text-brand">
                 From the catalogue
               </p>
               <p className="mt-1.5 text-[0.8125rem] font-medium leading-snug text-ink">

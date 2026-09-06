@@ -17,6 +17,7 @@ const chip = cva(
         neutral: "border-line-strong bg-surface-sunken text-ink-soft",
         brass: "border-brass/30 bg-brass-wash text-brass-strong",
         brick: "border-brick/30 bg-brick-wash text-brick-strong",
+        brand: "border-brand/25 bg-brand-wash text-brand-strong",
         positive: "border-positive/25 bg-positive-wash text-positive",
         caution: "border-caution/25 bg-caution-wash text-caution",
         critical: "border-critical/25 bg-critical-wash text-critical",

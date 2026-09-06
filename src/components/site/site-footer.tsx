@@ -1,3 +1,4 @@
+import { Monogram } from "@/components/site/monogram";
 import Link from "next/link";
 
 import { WhatsappLink } from "@/components/site/whatsapp-link";
@@ -27,7 +28,10 @@ export async function SiteFooter() {
       <Container width="wide" className="py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <p className="font-display text-lg text-ink">{site.name}</p>
+            <p className="flex items-center gap-2.5">
+              <Monogram className="size-9" />
+              <span className="font-display text-xl text-ink">{site.name}</span>
+            </p>
             <p className="mt-2 max-w-xs text-sm leading-relaxed text-ink-soft">
               Architectural and home hardware supplied across the Kathmandu valley.
             </p>
