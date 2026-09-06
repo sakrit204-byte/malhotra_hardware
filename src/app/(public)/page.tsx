@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ProductCard } from "@/components/catalogue/product-card";
+import { CountUp } from "@/components/site/count-up";
 import { Hero } from "@/components/site/hero";
 import { WhatsappLink } from "@/components/site/whatsapp-link";
 import { Button } from "@/components/ui/button";
@@ -157,7 +158,7 @@ export default async function HomePage() {
                 )}
               >
                 <dd className="font-display text-[clamp(3rem,6vw,5.5rem)] leading-[0.85] text-brand">
-                  {figure.value}
+                  <CountUp value={figure.value} />
                 </dd>
                 <dt className="note mt-4">{figure.label}</dt>
               </div>

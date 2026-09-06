@@ -5,6 +5,7 @@ import { AccountMenu } from "@/components/site/account-menu";
 import { MobileNav } from "@/components/site/mobile-nav";
 import { Monogram } from "@/components/site/monogram";
 import { NavLink } from "@/components/site/nav-link";
+import { SearchBox } from "@/components/site/search-box";
 import { Container } from "@/components/ui/container";
 import { primaryNavigation, site } from "@/lib/site";
 
@@ -46,24 +47,7 @@ export function SiteHeader({
           </nav>
 
           <div className="ml-auto flex items-center gap-1">
-            <form action="/products" className="hidden md:block" role="search">
-              <label htmlFor="header-search" className="sr-only">
-                Search products
-              </label>
-              <div className="relative">
-                <Search
-                  className="pointer-events-none absolute left-2.5 top-1/2 size-4 shrink-0 -translate-y-1/2 text-ink-muted"
-                  aria-hidden="true"
-                />
-                <input
-                  id="header-search"
-                  name="q"
-                  type="search"
-                  placeholder="Search products"
-                  className="h-9 w-44 rounded-md border border-line-strong bg-surface-raised pl-8 pr-3 text-sm transition-[width,border-color] duration-[--duration-settled] ease-[--ease-quiet] placeholder:text-ink-muted hover:border-ink-muted focus:w-60"
-                />
-              </div>
-            </form>
+            <SearchBox />
 
             <Link
               href="/products"

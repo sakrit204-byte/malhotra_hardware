@@ -38,17 +38,28 @@ export function LoadingRegion({
   );
 }
 
+/**
+ * An empty or failed state owns a real heading, at whatever level the page
+ * needs. Defaulting to a second level heading keeps the outline honest when a
+ * list is empty: a page never jumps from its title straight to a third level.
+ */
+type HeadingLevel = 1 | 2 | 3;
+
 export function EmptyState({
   title,
   description,
   action,
   className,
+  level = 2,
 }: {
   title: string;
   description?: ReactNode;
   action?: ReactNode;
   className?: string;
+  level?: HeadingLevel;
 }) {
+  const Heading = `h${level}` as const;
+
   return (
     <div
       className={cn(
@@ -56,7 +67,7 @@ export function EmptyState({
         className,
       )}
     >
-      <h3 className="text-lg text-ink">{title}</h3>
+      <Heading className="text-lg text-ink">{title}</Heading>
       {description ? (
         <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
           {description}
@@ -72,12 +83,16 @@ export function ErrorState({
   description,
   action,
   className,
+  level = 2,
 }: {
   title?: string;
   description?: ReactNode;
   action?: ReactNode;
   className?: string;
+  level?: HeadingLevel;
 }) {
+  const Heading = `h${level}` as const;
+
   return (
     <div
       role="alert"
@@ -86,7 +101,7 @@ export function ErrorState({
         className,
       )}
     >
-      <h3 className="text-lg text-ink">{title}</h3>
+      <Heading className="text-lg text-ink">{title}</Heading>
       {description ? (
         <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-ink-soft">
           {description}

@@ -255,3 +255,37 @@ export async function updateInquiryLine(formData: FormData): Promise<void> {
   revalidatePath("/inquiry");
   revalidatePath("/", "layout");
 }
+
+export type BasketLine = {
+  key: string;
+  productId: string;
+  name: string;
+  code: string;
+  option: string | null;
+  quantity: number;
+  image: string | null;
+  href: string;
+};
+
+/**
+ * The basket as a short list, for the drawer that opens when something is
+ * added. Resolved against the catalogue exactly as the inquiry page resolves
+ * it, so the drawer can never show a line the inquiry page would drop.
+ */
+export async function readBasketLines(): Promise<{ lines: BasketLine[]; count: number }> {
+  const resolved = await resolveBasket(await readBasket());
+
+  return {
+    count: resolved.itemCount,
+    lines: resolved.lines.map((line) => ({
+      key: line.productId + ":" + (line.variantId ?? ""),
+      productId: line.productId,
+      name: line.product.name,
+      code: line.variant?.code ?? line.product.code,
+      option: line.variant?.name ?? null,
+      quantity: line.quantity,
+      image: line.product.imageUrl,
+      href: "/products/" + line.product.slug,
+    })),
+  };
+}

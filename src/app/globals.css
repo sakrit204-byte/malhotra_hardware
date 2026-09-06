@@ -517,6 +517,25 @@
   }
 }
 
+/* A page arrives. Played once per navigation by the public template, under a
+   fixed header and footer, so what moves is the content and not the frame. */
+@media (prefers-reduced-motion: no-preference) {
+  .page-in {
+    animation: page-in 520ms var(--ease-quiet) both;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 @keyframes reveal-in {
   from {
     opacity: 0;

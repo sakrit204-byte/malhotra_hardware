@@ -156,7 +156,7 @@ export default async function ProductDetailPage({
             ) : null}
           </div>
 
-          <div>
+          <div className="lg:sticky lg:top-28 lg:self-start">
             <p className="note flex items-baseline justify-between gap-4 border-t border-ink pt-3">
               <span>{product.category.name}</span>
               <span className="normal-case tracking-normal">{product.code}</span>

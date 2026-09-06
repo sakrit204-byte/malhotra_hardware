@@ -59,9 +59,20 @@ export function AddToInquiry({
   useEffect(() => {
     if (!settled) return;
 
+    // Anything listening, in practice the inquiry drawer, is told what was
+    // just added. The button itself stays self contained: it works exactly
+    // the same when nothing is listening.
+    if (state.ok) {
+      window.dispatchEvent(
+        new CustomEvent("inquiry:added", {
+          detail: { productId, variantId: variantId ?? null },
+        }),
+      );
+    }
+
     const timer = setTimeout(() => setAcknowledged(state), failed ? 5000 : 2600);
     return () => clearTimeout(timer);
-  }, [settled, failed, state]);
+  }, [settled, failed, state, productId, variantId]);
 
   const buttonLabel = pending
     ? "Adding"

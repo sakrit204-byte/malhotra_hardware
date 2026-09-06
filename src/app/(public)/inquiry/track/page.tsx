@@ -36,6 +36,7 @@ export default async function TrackInquiryPage({
     return (
       <Container width="narrow" className="py-16 lg:py-24">
         <ErrorState
+          level={1}
           title="This link is not valid"
           description="It may have expired, or it may have been copied incompletely from the email. Search your inbox for the confirmation, or contact us with your reference number and we will help."
           action={

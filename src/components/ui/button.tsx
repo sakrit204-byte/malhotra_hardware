@@ -16,6 +16,11 @@ const button = cva(
     "inline-flex items-center justify-center gap-2 whitespace-nowrap",
     "font-medium transition-colors duration-[--duration-quick] ease-[--ease-quiet]",
     "disabled:pointer-events-none disabled:opacity-50",
+    // A press is felt as well as seen, and a trailing arrow leans into the
+    // hover. Both are tiny, and both are the difference between a control that
+    // responds and one that merely recolours.
+    "active:translate-y-px active:scale-[0.985] motion-reduce:active:transform-none",
+    "[&_.lucide-arrow-right]:transition-transform [&_.lucide-arrow-right]:duration-[--duration-quick] hover:[&_.lucide-arrow-right]:translate-x-0.5",
     "aria-disabled:pointer-events-none aria-disabled:opacity-50",
   ],
   {

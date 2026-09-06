@@ -1,3 +1,4 @@
+import { InquiryDrawer } from "@/components/inquiry/inquiry-drawer";
 import { RevealOnScroll } from "@/components/site/reveal-on-scroll";
 import { SiteFooter } from "@/components/site/site-footer";
 import { SiteHeader } from "@/components/site/site-header";
@@ -14,7 +15,7 @@ import { resolveBasket } from "@/server/inquiry/resolve";
  */
 export default async function PublicLayout({ children }: LayoutProps<"/">) {
   // Resolved rather than counted from the cookie, so the header can never
-  // advertise a product that has since been withdrawn, and so the running
+  // advertise a product that has since been withdrawn.
   const [session, resolved] = await Promise.all([
     getSession(),
     resolveBasket(await readBasket()),
@@ -36,6 +37,7 @@ export default async function PublicLayout({ children }: LayoutProps<"/">) {
         {children}
       </main>
       <SiteFooter />
+      <InquiryDrawer />
     </>
   );
 }

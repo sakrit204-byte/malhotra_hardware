@@ -679,3 +679,93 @@ export async function listCategoryIndex() {
     },
   });
 }
+
+export type SearchSuggestion = {
+  products: Array<{
+    id: string;
+    name: string;
+    slug: string;
+    code: string;
+    category: string;
+    image: string | null;
+  }>;
+  categories: Array<{ name: string; slug: string; count: number }>;
+};
+
+/**
+ * What the search box offers while somebody is still typing.
+ *
+ * The same ranking as the results page, cut to the first six, so what is
+ * suggested and what the page then shows can never disagree. Categories come
+ * from a plain name match rather than the index, because there are sixteen of
+ * them and a person typing "hand" wants to see Door handles, not a ranked
+ * essay about them.
+ */
+export async function searchSuggestions(term: string): Promise<SearchSuggestion> {
+  const trimmed = term.trim().slice(0, 80);
+  if (trimmed.length < 2) return { products: [], categories: [] };
+
+  const [{ ids }, categories] = await Promise.all([
+    searchProductIds(trimmed),
+    prisma.category.findMany({
+      where: {
+        deletedAt: null,
+        isHidden: false,
+        parentId: null,
+        name: { contains: trimmed, mode: "insensitive" },
+      },
+      take: 3,
+      orderBy: { sortOrder: "asc" },
+      select: {
+        name: true,
+        slug: true,
+        _count: { select: { productsAsCategory: { where: visible } } },
+      },
+    }),
+  ]);
+
+  const top = ids.slice(0, 6);
+
+  const rows =
+    top.length === 0
+      ? []
+      : await prisma.product.findMany({
+          where: { id: { in: top }, ...visible },
+          select: {
+            id: true,
+            name: true,
+            slug: true,
+            code: true,
+            category: { select: { name: true } },
+            images: {
+              take: 1,
+              orderBy: [{ isPrimary: "desc" }, { sortOrder: "asc" }],
+              select: { url: true },
+            },
+          },
+        });
+
+  const byId = new Map(rows.map((row) => [row.id, row]));
+
+  return {
+    products: top.flatMap((id) => {
+      const row = byId.get(id);
+      if (!row) return [];
+      return [
+        {
+          id: row.id,
+          name: row.name,
+          slug: row.slug,
+          code: row.code,
+          category: row.category.name,
+          image: row.images[0]?.url ?? null,
+        },
+      ];
+    }),
+    categories: categories.map((category) => ({
+      name: category.name,
+      slug: category.slug,
+      count: category._count.productsAsCategory,
+    })),
+  };
+}
