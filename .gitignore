@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local env
+.env
+.env*.local
+
+# storage
+/public/uploads
+/storage/private
+
+# prisma generated client
+/src/generated

@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    container_name: malhotra_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: malhotra
+      POSTGRES_PASSWORD: malhotra_dev_password
+      POSTGRES_DB: malhotra_enterprise
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U malhotra -d malhotra_enterprise"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: malhotra_mailpit
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
+volumes:
+  postgres_data:

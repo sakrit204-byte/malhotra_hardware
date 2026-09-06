@@ -1,0 +1,659 @@
+// Malhotra Enterprise Digital Product Catalogue and Inquiry Platform
+// Schema is authored so that catalogue taxonomy, technical specifications and
+// filter values are all data rather than code. Adding a category, a finish or a
+// new technical attribute never requires a migration.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// Enumerations
+// ---------------------------------------------------------------------------
+
+enum Role {
+  USER
+  MANAGER
+  ADMIN
+}
+
+enum Availability {
+  IN_STOCK
+  LIMITED
+  MADE_TO_ORDER
+  OUT_OF_STOCK
+  ON_REQUEST
+}
+
+enum InquiryStatus {
+  NEW
+  UNDER_REVIEW
+  AWAITING_CUSTOMER
+  CUSTOMER_RESPONDED
+  QUOTATION_PENDING
+  QUOTATION_SENT
+  COMPLETED
+  CLOSED
+}
+
+enum SenderType {
+  CUSTOMER
+  MANAGER
+  SYSTEM
+}
+
+enum SpecificationDataType {
+  TEXT
+  NUMBER
+  BOOLEAN
+  OPTION
+}
+
+enum TokenType {
+  EMAIL_VERIFICATION
+  PASSWORD_RESET
+  INQUIRY_ACCESS
+  INQUIRY_CLAIM
+}
+
+enum EmailStatus {
+  QUEUED
+  SENT
+  FAILED
+}
+
+enum NotificationType {
+  INQUIRY_CREATED
+  CUSTOMER_REPLIED
+  MANAGER_REPLIED
+  STATUS_CHANGED
+  QUOTATION_SENT
+}
+
+// ---------------------------------------------------------------------------
+// Identity and access
+// ---------------------------------------------------------------------------
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  passwordHash    String
+  fullName        String
+  phone           String?
+  companyName     String?
+  role            Role      @default(USER)
+  isActive        Boolean   @default(true)
+  emailVerifiedAt DateTime?
+  lastLoginAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  sessions        Session[]
+  tokens          VerificationToken[]
+  inquiries       Inquiry[]              @relation("InquiryCustomer")
+  assignedInquiry Inquiry[]              @relation("InquiryManager")
+  messages        InquiryMessage[]
+  statusChanges   InquiryStatusHistory[]
+  notifications   Notification[]
+  auditLogs       AuditLog[]
+  attachments     InquiryAttachment[]
+
+  @@index([role, isActive])
+  @@index([deletedAt])
+  @@map("users")
+}
+
+model Session {
+  id         String   @id @default(cuid())
+  userId     String
+  tokenHash  String   @unique
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  lastUsedAt DateTime @default(now())
+  ipAddress  String?
+  userAgent  String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+model VerificationToken {
+  id         String    @id @default(cuid())
+  userId     String?
+  email      String
+  tokenHash  String    @unique
+  type       TokenType
+  inquiryId  String?
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime  @default(now())
+
+  user    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  inquiry Inquiry? @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+
+  @@index([email, type])
+  @@index([expiresAt])
+  @@map("verification_tokens")
+}
+
+model RateLimit {
+  id          String   @id @default(cuid())
+  bucketKey   String
+  windowStart DateTime
+  hits        Int      @default(1)
+  expiresAt   DateTime
+
+  @@unique([bucketKey, windowStart])
+  @@index([expiresAt])
+  @@map("rate_limits")
+}
+
+// ---------------------------------------------------------------------------
+// Catalogue taxonomy. Every value here is administrator managed.
+// ---------------------------------------------------------------------------
+
+model Category {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  imageUrl        String?
+  imageCredit     String?
+  parentId        String?
+  sortOrder       Int       @default(0)
+  isHidden        Boolean   @default(false)
+  isFeatured      Boolean   @default(false)
+  metaTitle       String?
+  metaDescription String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+  deletedAt       DateTime?
+
+  parent   Category?  @relation("CategoryTree", fields: [parentId], references: [id], onDelete: Restrict)
+  children Category[] @relation("CategoryTree")
+
+  productsAsCategory    Product[] @relation("ProductCategory")
+  productsAsSubcategory Product[] @relation("ProductSubcategory")
+
+  @@index([parentId, sortOrder])
+  @@index([isHidden, deletedAt])
+  @@index([name(ops: raw("gin_trgm_ops"))], map: "categories_name_trgm_idx", type: Gin)
+  @@map("categories")
+}
+
+model Brand {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  logoUrl   String?
+  website   String?
+  summary   String?
+  sortOrder Int       @default(0)
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  products Product[]
+
+  @@index([name(ops: raw("gin_trgm_ops"))], map: "brands_name_trgm_idx", type: Gin)
+  @@map("brands")
+}
+
+model Material {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  sortOrder Int       @default(0)
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  products Product[]
+  variants ProductVariant[]
+
+  @@map("materials")
+}
+
+model Finish {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  swatchHex String?
+  sortOrder Int       @default(0)
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  products Product[]
+  variants ProductVariant[]
+
+  @@map("finishes")
+}
+
+model Application {
+  id        String    @id @default(cuid())
+  name      String
+  slug      String    @unique
+  sortOrder Int       @default(0)
+  isHidden  Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  deletedAt DateTime?
+
+  products Product[]
+
+  @@map("applications")
+}
+
+model Tag {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  createdAt DateTime @default(now())
+
+  products Product[]
+
+  @@index([name(ops: raw("gin_trgm_ops"))], map: "tags_name_trgm_idx", type: Gin)
+  @@map("tags")
+}
+
+// ---------------------------------------------------------------------------
+// Products
+// ---------------------------------------------------------------------------
+
+model Product {
+  id               String       @id @default(cuid())
+  name             String
+  slug             String       @unique
+  code             String       @unique
+  categoryId       String
+  subcategoryId    String?
+  brandId          String?
+  materialId       String?
+  finishId         String?
+  applicationId    String?
+  shortDescription String?
+  description      String?
+  dimensions       String?
+  availability     Availability @default(ON_REQUEST)
+  attributes       Json         @default("{}")
+  isPublished      Boolean      @default(false)
+  publishedAt      DateTime?
+  isFeatured       Boolean      @default(false)
+  isPopular        Boolean      @default(false)
+  sortOrder        Int          @default(0)
+  viewCount        Int          @default(0)
+  metaTitle        String?
+  metaDescription  String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @updatedAt
+  deletedAt        DateTime?
+
+  // Maintained by PostgreSQL as a stored generated column. See the init
+  // migration for the expression and the GIN index that backs catalogue search.
+  searchVector Unsupported("tsvector")?
+
+  category    Category     @relation("ProductCategory", fields: [categoryId], references: [id], onDelete: Restrict)
+  subcategory Category?    @relation("ProductSubcategory", fields: [subcategoryId], references: [id], onDelete: SetNull)
+  brand       Brand?       @relation(fields: [brandId], references: [id], onDelete: SetNull)
+  material    Material?    @relation(fields: [materialId], references: [id], onDelete: SetNull)
+  finish      Finish?      @relation(fields: [finishId], references: [id], onDelete: SetNull)
+  application Application? @relation(fields: [applicationId], references: [id], onDelete: SetNull)
+
+  tags           Tag[]
+  images         ProductImage[]
+  variants       ProductVariant[]
+  specifications ProductSpecification[]
+  documents      ProductDocument[]
+  inquiryItems   InquiryItem[]
+
+  @@index([categoryId, isPublished])
+  @@index([subcategoryId])
+  @@index([brandId])
+  @@index([isPublished, publishedAt])
+  @@index([isFeatured, isPublished])
+  @@index([deletedAt])
+  // Catalogue search. Declared here so that a future migration does not offer
+  // to drop indexes the search depends on.
+  @@index([searchVector], map: "products_search_vector_idx", type: Gin)
+  @@index([name(ops: raw("gin_trgm_ops"))], map: "products_name_trgm_idx", type: Gin)
+  @@index([code(ops: raw("gin_trgm_ops"))], map: "products_code_trgm_idx", type: Gin)
+  @@map("products")
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  productId String
+  url       String
+  alt       String
+  width     Int?
+  height    Int?
+  credit    String?
+  sourceUrl String?
+  isPrimary Boolean  @default(false)
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId, sortOrder])
+  @@map("product_images")
+}
+
+model ProductVariant {
+  id           String       @id @default(cuid())
+  productId    String
+  name         String
+  code         String       @unique
+  size         String?
+  colour       String?
+  model        String?
+  materialId   String?
+  finishId     String?
+  availability Availability @default(ON_REQUEST)
+  imageUrl     String?
+  sortOrder    Int          @default(0)
+  isActive     Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  product  Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  material Material? @relation(fields: [materialId], references: [id], onDelete: SetNull)
+  finish   Finish?   @relation(fields: [finishId], references: [id], onDelete: SetNull)
+
+  inquiryItems   InquiryItem[]
+
+  @@index([productId, sortOrder])
+  @@index([finishId])
+  @@index([materialId])
+  @@map("product_variants")
+}
+
+// Administrator defined technical attributes. A new specification is a row in
+// specification_definitions, never a schema change.
+model SpecificationDefinition {
+  id           String                @id @default(cuid())
+  key          String                @unique
+  label        String
+  unit         String?
+  dataType     SpecificationDataType @default(TEXT)
+  groupName    String?
+  options      String[]              @default([])
+  isFilterable Boolean               @default(false)
+  sortOrder    Int                   @default(0)
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+
+  values ProductSpecification[]
+
+  @@map("specification_definitions")
+}
+
+model ProductSpecification {
+  id           String   @id @default(cuid())
+  productId    String
+  definitionId String
+  value        String
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  product    Product                 @relation(fields: [productId], references: [id], onDelete: Cascade)
+  definition SpecificationDefinition @relation(fields: [definitionId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, definitionId])
+  @@index([definitionId, value])
+  @@map("product_specifications")
+}
+
+model ProductDocument {
+  id          String   @id @default(cuid())
+  productId   String
+  title       String
+  storagePath String
+  mimeType    String
+  fileSize    Int
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@map("product_documents")
+}
+
+// ---------------------------------------------------------------------------
+// Inquiries
+// ---------------------------------------------------------------------------
+
+model InquirySequence {
+  year       Int      @id
+  lastNumber Int      @default(0)
+  updatedAt  DateTime @updatedAt
+
+  @@map("inquiry_sequences")
+}
+
+model Inquiry {
+  id                     String        @id @default(cuid())
+  reference              String        @unique
+  year                   Int
+  sequence               Int
+  userId                 String?
+  fullName               String
+  email                  String
+  phone                  String
+  companyName            String?
+  projectName            String?
+  projectLocation        String?
+  additionalRequirements String?
+  message                String
+  status                 InquiryStatus @default(NEW)
+  assignedManagerId      String?
+  itemCount              Int           @default(0)
+
+  lastActivityAt         DateTime      @default(now())
+  unreadForManager       Boolean       @default(true)
+  unreadForCustomer      Boolean       @default(false)
+  summaryPath            String?
+  ipAddress              String?
+  createdAt              DateTime      @default(now())
+  updatedAt              DateTime      @updatedAt
+  closedAt               DateTime?
+
+  customer User? @relation("InquiryCustomer", fields: [userId], references: [id], onDelete: SetNull)
+  manager  User? @relation("InquiryManager", fields: [assignedManagerId], references: [id], onDelete: SetNull)
+
+  items         InquiryItem[]
+  messages      InquiryMessage[]
+  attachments   InquiryAttachment[]
+  statusHistory InquiryStatusHistory[]
+  tokens        VerificationToken[]
+  emailLogs     EmailLog[]
+  notifications Notification[]
+
+  @@index([status, lastActivityAt])
+  @@index([email])
+  @@index([userId])
+  @@index([assignedManagerId])
+  @@index([createdAt])
+  // Manager search across reference, name and address.
+  @@index([reference(ops: raw("gin_trgm_ops"))], map: "inquiries_reference_trgm_idx", type: Gin)
+  @@index([fullName(ops: raw("gin_trgm_ops"))], map: "inquiries_full_name_trgm_idx", type: Gin)
+  @@index([email(ops: raw("gin_trgm_ops"))], map: "inquiries_email_trgm_idx", type: Gin)
+  @@map("inquiries")
+}
+
+// Item rows keep a snapshot of the product wording so that inquiry history
+// stays truthful even after a product is renamed or withdrawn.
+model InquiryItem {
+  id           String   @id @default(cuid())
+  inquiryId    String
+  productId    String?
+  variantId    String?
+  productName  String
+  productCode  String
+  variantLabel String?
+  finishLabel  String?
+  imageUrl     String?
+  quantity     Int      @default(1)
+  note         String?
+  sortOrder    Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  inquiry Inquiry         @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  product Product?        @relation(fields: [productId], references: [id], onDelete: SetNull)
+  variant ProductVariant? @relation(fields: [variantId], references: [id], onDelete: SetNull)
+
+  @@index([inquiryId, sortOrder])
+  @@map("inquiry_items")
+}
+
+model InquiryMessage {
+  id               String     @id @default(cuid())
+  inquiryId        String
+  senderType       SenderType
+  senderUserId     String?
+  senderName       String
+  body             String
+  isInternalNote   Boolean    @default(false)
+  readByCustomerAt DateTime?
+  readByManagerAt  DateTime?
+  createdAt        DateTime   @default(now())
+
+  inquiry     Inquiry             @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  senderUser  User?               @relation(fields: [senderUserId], references: [id], onDelete: SetNull)
+  attachments InquiryAttachment[]
+  emailLogs   EmailLog[]
+
+  @@index([inquiryId, createdAt])
+  @@map("inquiry_messages")
+}
+
+model InquiryAttachment {
+  id             String     @id @default(cuid())
+  inquiryId      String
+  messageId      String?
+  fileName       String
+  storagePath    String
+  mimeType       String
+  fileSize       Int
+  uploadedByType SenderType @default(CUSTOMER)
+  uploadedById   String?
+  createdAt      DateTime   @default(now())
+
+  inquiry    Inquiry         @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  message    InquiryMessage? @relation(fields: [messageId], references: [id], onDelete: Cascade)
+  uploadedBy User?           @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+
+  @@index([inquiryId])
+  @@map("inquiry_attachments")
+}
+
+model InquiryStatusHistory {
+  id          String         @id @default(cuid())
+  inquiryId   String
+  fromStatus  InquiryStatus?
+  toStatus    InquiryStatus
+  changedById String?
+  note        String?
+  createdAt   DateTime       @default(now())
+
+  inquiry   Inquiry @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+  changedBy User?   @relation(fields: [changedById], references: [id], onDelete: SetNull)
+
+  @@index([inquiryId, createdAt])
+  @@map("inquiry_status_history")
+}
+
+// ---------------------------------------------------------------------------
+// Operations: mail, notifications, audit, editable site content
+// ---------------------------------------------------------------------------
+
+model EmailLog {
+  id                String      @id @default(cuid())
+  toAddress         String
+  fromAddress       String
+  subject           String
+  template          String
+  status            EmailStatus @default(QUEUED)
+  providerMessageId String?
+  error             String?
+  inquiryId         String?
+  messageId         String?
+  attempts          Int         @default(0)
+  sentAt            DateTime?
+  createdAt         DateTime    @default(now())
+
+  inquiry Inquiry?        @relation(fields: [inquiryId], references: [id], onDelete: SetNull)
+  message InquiryMessage? @relation(fields: [messageId], references: [id], onDelete: SetNull)
+
+  @@index([inquiryId])
+  @@index([status, createdAt])
+  @@map("email_logs")
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String?
+  forRole   Role?
+  type      NotificationType
+  title     String
+  body      String
+  linkPath  String?
+  inquiryId String?
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user    User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  inquiry Inquiry? @relation(fields: [inquiryId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt])
+  @@index([forRole, readAt])
+  @@map("notifications")
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  actorUserId String?
+  actorEmail  String?
+  actorRole   Role?
+  action      String
+  entityType  String
+  entityId    String?
+  summary     String
+  before      Json?
+  after       Json?
+  ipAddress   String?
+  createdAt   DateTime @default(now())
+
+  actor User? @relation(fields: [actorUserId], references: [id], onDelete: SetNull)
+
+  @@index([entityType, entityId])
+  @@index([actorUserId, createdAt])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model SiteContent {
+  key         String   @id
+  value       Json
+  description String?
+  updatedById String?
+  updatedAt   DateTime @updatedAt
+
+  @@map("site_content")
+}

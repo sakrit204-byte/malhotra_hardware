@@ -1,26 +1,559 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   Malhotra Enterprise design tokens
+
+   One palette, one type scale, one radius scale, one motion scale. Components
+   never invent their own colour or spacing values; they consume these tokens.
+   The palette is warm neutral with a single aged brass accent drawn from the
+   hardware itself, so photography stays the loudest thing on every page.
+   ========================================================================== */
+
+@theme {
+  /* ------------------------------------------------------------------
+     The palette is taken from what Kathmandu is built out of: fired brick,
+     seasoned timber and the gilt brass on a temple door, sitting on the warm
+     paper of an unbleached page. It gives the site a clear sense of where the
+     company is without a single flag or pasted on motif.
+     ------------------------------------------------------------------ */
+
+  /* Surfaces, from the warmest page ground to the darkest section panel. */
+  --color-surface: #faf7f2;
+  --color-surface-raised: #fffdfa;
+  --color-surface-sunken: #f3ede4;
+  --color-surface-inverse: #241e19;
+  --color-surface-inverse-raised: #322a23;
+
+  /* Ink. Warm near black rather than grey, so text sits with the brick. */
+  --color-ink: #1e1815;
+  --color-ink-soft: #574c43;
+  --color-ink-muted: #857567;
+  --color-ink-inverse: #f8f4ee;
+  --color-ink-inverse-soft: #c9bcac;
+
+  /* Lines. Hairlines do most of the structural work in place of heavy cards. */
+  --color-line: #e7dfd3;
+  --color-line-strong: #d2c5b4;
+  --color-line-inverse: #423830;
+
+  /* The sheet. Setting out lines are drawn far fainter than a border: they are
+     meant to be felt rather than read, the way pencil guides sit under ink. */
+  --color-grid: #ece4d8;
+  --color-grid-inverse: #332b24;
+
+  /* Fired brick. The primary accent, and the colour of the valley.
+     It is used as a ground here and not only as an accent: a whole band of it
+     is what stops a page of paper and ink reading as timid. */
+  --color-brick: #a9482c;
+  --color-brick-strong: #83341e;
+  --color-brick-deep: #6d2916;
+  --color-brick-wash: #f8ebe4;
+
+  /* Gilt brass. The secondary accent, for metal and for quiet emphasis. */
+  --color-brass: #a3803f;
+  --color-brass-strong: #7e6230;
+  --color-brass-wash: #f5eedf;
+
+  /* Seasoned timber, for dark panels that should not read as grey. */
+  --color-timber: #4a3728;
+
+  /* On a brick ground. Warm off white rather than pure white, so the band
+     belongs to the same page as the paper above and below it. */
+  --color-ink-onbrick: #fdf3ee;
+  --color-ink-onbrick-soft: #edc9ba;
+  --color-line-onbrick: #c3775e;
+
+  /* Status colours, warmed so they belong to the same family. */
+  --color-positive: #326b48;
+  --color-positive-wash: #e9f1ea;
+  --color-caution: #8a6215;
+  --color-caution-wash: #f8f0dd;
+  --color-critical: #9c3025;
+  --color-critical-wash: #f9eae8;
+  --color-info: #2f5470;
+  --color-info-wash: #e9eef2;
+
+  /* Focus ring. Chosen for contrast against every surface above, not for
+     harmony: it has one job and it has to do it everywhere. */
+  --color-focus: #17457f;
+
+  /* Typography. Instrument Serif carries display headings, Instrument Sans
+     carries interface text and long specification content. They are drawn as a
+     pair, which is why headings and tables sit together without argument. */
+  --font-display: var(--font-instrument-serif), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-instrument-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+
+  /* The display sizes are set against the viewport rather than fixed, because
+     the page is a drawing sheet: a title block on a large sheet is drawn
+     large. The lower bound keeps a phone readable, the upper bound stops a
+     very wide screen turning a headline into a billboard. */
+  --text-display: clamp(2.75rem, 5.6vw, 6.5rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.025em;
+
+  --text-title: clamp(2rem, 3.4vw, 3.75rem);
+  --text-title--line-height: 1.02;
+  --text-title--letter-spacing: -0.022em;
+
+  /* Lettering. Small, spaced and monospaced, the way a note on a drawing is
+     lettered. Used for codes, dimensions, sheet numbers and section marks. */
+  --text-note: 0.6875rem;
+  --text-note--line-height: 1.45;
+  --text-note--letter-spacing: 0.11em;
+
+  /* Square. A drawing has no rounded corners, and once the page is set out
+     like one a softened button is the thing that gives it away. The scale is
+     kept so that a single element can still be relieved if it ever needs to
+     be, but the default everywhere is a true corner. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 1px;
+
+  /* Shadows exist to separate a floating layer from the page, nothing more. */
+  --shadow-raised: 0 1px 2px rgb(28 27 25 / 0.05);
+  --shadow-overlay: 0 12px 32px -12px rgb(28 27 25 / 0.22), 0 2px 6px -2px rgb(28 27 25 / 0.1);
+
+  /* Motion. Short, eased, and always tied to a state change. */
+  --ease-quiet: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-instant: 90ms;
+  --duration-quick: 160ms;
+  --duration-settled: 280ms;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    /* Sixteen pixels, not fifteen. The old size let too much fit on a screen,
+       which is most of what made the catalogue feel busy. */
+    font-size: 1rem;
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* One focus treatment everywhere. Visible on light and dark surfaces, never
+     removed, never replaced by a colour change alone. */
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  .on-inverse :focus-visible {
+    outline-color: var(--color-ink-inverse);
+  }
+
+  /* Native controls inherit the palette rather than the operating system. */
+  input,
+  textarea,
+  select,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+
+  ::selection {
+    background-color: var(--color-brass-wash);
+    color: var(--color-ink);
+  }
+
+  /* Anything decorative stops moving when the reader asks it to. Transitions
+     that communicate state are reduced rather than removed so that focus and
+     hover feedback survives. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Keyboard users land on this first. It is visually hidden until focused. */
+  .skip-link {
+    position: absolute;
+    left: 0.75rem;
+    top: -4rem;
+    z-index: 100;
+    background-color: var(--color-ink);
+    color: var(--color-ink-inverse);
+    padding: 0.625rem 1rem;
+    border-radius: var(--radius-md);
+    transition: top var(--duration-quick) var(--ease-quiet);
+  }
+
+  .skip-link:focus-visible {
+    top: 0.75rem;
+  }
+
+  /* Section label used above headings. Small caps rather than shouting
+     uppercase, and always paired with a real heading underneath. */
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+    font-weight: 500;
+  }
+
+  /* ----------------------------------------------------------------------
+     The sheet
+
+     The page is laid out the way a drawing is: setting out lines, a title
+     block, measured dimensions and lettered notes. It is a real convention
+     rather than decoration, and it suits a company that sells to architects.
+
+     Two rules keep it from becoming costume. The setting out lines are drawn
+     at a contrast you have to look for, and every annotation says something
+     true, taken from the database rather than invented for the look.
+     ---------------------------------------------------------------------- */
+
+  /* Lettering, as a draughtsman would letter a note by hand. */
+  .note {
+    font-family: var(--font-mono);
+    font-size: var(--text-note);
+    line-height: var(--text-note--line-height);
+    letter-spacing: var(--text-note--letter-spacing);
+    text-transform: uppercase;
+    color: var(--color-ink-muted);
+  }
+
+  /* The same lettering where it carries a value rather than a label: a code, a
+     price, a size. Left in its own case and spaced normally, so it stays easy
+     to read back over a telephone. */
+  .figure {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /*
+    Setting out lines.
+
+    Drawn as a background so they cost nothing and can never be read out by a
+    screen reader. The columns match the content grid, and the lines are
+    inset by the same padding as the container so a rule never lands in the
+    page margin. They are hidden below the large breakpoint, where a narrow
+    screen has no columns worth setting out.
+  */
+  .sheet {
+    position: relative;
+    /* The sheet owns its own stacking context so the setting out lines can be
+       put behind everything in it without falling behind the page itself. An
+       absolutely positioned line would otherwise paint over ordinary text,
+       which is the one thing a guide line must never do. */
+    isolation: isolate;
+  }
+
+  @media (min-width: 1024px) {
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image: repeating-linear-gradient(
+        to right,
+        var(--color-grid) 0 1px,
+        transparent 1px var(--sheet-column, 25%)
+      );
+      background-position: left top;
+      opacity: 0.85;
+    }
+
+    .on-inverse .sheet::before,
+    .sheet.on-inverse::before {
+      background-image: repeating-linear-gradient(
+        to right,
+        var(--color-grid-inverse) 0 1px,
+        transparent 1px var(--sheet-column, 25%)
+      );
+    }
+  }
+
+  /*
+    Corner ticks.
+
+    Four short rules at the corners of a frame, the way a plate is registered
+    on a sheet. Cheaper and quieter than a full border, and they let the
+    photograph sit on the page without being boxed in.
+  */
+  .ticked {
+    position: relative;
+  }
+
+  /*
+    A band of brick.
+
+    One section of the home page is set on it, which is what gives the page a
+    pulse without a single moving gradient. Everything inside inherits its own
+    line and lettering colours, so a hairline stays a hairline rather than
+    disappearing into the ground.
+  */
+  .on-brick {
+    background-color: var(--color-brick);
+    color: var(--color-ink-onbrick);
+    --color-line: var(--color-line-onbrick);
+    --color-line-strong: var(--color-line-onbrick);
+    --color-ink: var(--color-ink-onbrick);
+    --color-ink-soft: var(--color-ink-onbrick-soft);
+    --color-ink-muted: var(--color-ink-onbrick-soft);
+    --color-grid: color-mix(in oklab, var(--color-brick-strong) 70%, transparent);
+    /* Anything written for a dark panel works here too, so a title block set
+       to the inverse tone does not have to know which ground it landed on. */
+    --color-ink-inverse: var(--color-ink-onbrick);
+    --color-ink-inverse-soft: var(--color-ink-onbrick-soft);
+    --color-line-inverse: var(--color-line-onbrick);
+  }
+
+  .on-brick :focus-visible {
+    outline-color: var(--color-ink-onbrick);
+  }
+
+  /*
+    A plate answers a pointer.
+
+    The photograph pushes in, the registration marks reach out, and the caption
+    underlines itself. Three small movements on one timing curve, so the card
+    reads as a single object responding rather than as parts twitching.
+  */
+  .plate-hover img {
+    transition: transform 700ms var(--ease-quiet);
+  }
+
+  .group:hover .plate-hover img {
+    transform: scale(1.05);
+  }
+
+  .plate-hover.ticked::before,
+  .plate-hover.ticked::after {
+    transition:
+      inset 400ms var(--ease-quiet),
+      border-color 400ms var(--ease-quiet);
+  }
+
+  .group:hover .plate-hover.ticked::before {
+    left: -0.75rem;
+    top: -0.75rem;
+    border-color: var(--color-brick);
+  }
+
+  .group:hover .plate-hover.ticked::after {
+    right: -0.75rem;
+    bottom: -0.75rem;
+    border-color: var(--color-brick);
+  }
+
+  .ticked::before,
+  .ticked::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    width: 0.6875rem;
+    height: 0.6875rem;
+    pointer-events: none;
+    border-color: var(--color-line-strong);
+  }
+
+  /* The marks sit just outside the image on the page ground rather than on top
+     of the photograph, where a pale picture would swallow them. */
+  .ticked::before {
+    left: -0.4375rem;
+    top: -0.4375rem;
+    border-left: 1px solid;
+    border-top: 1px solid;
+  }
+
+  .ticked::after {
+    right: -0.4375rem;
+    bottom: -0.4375rem;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+  }
+
+  .on-inverse .ticked::before,
+  .on-inverse .ticked::after {
+    border-color: var(--color-line-inverse);
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* A single entrance movement, used only where it establishes reading order:
+   the hero rule, then the headline, then the supporting text, then the
+   actions. It runs once on load and never repeats. Under a reduced motion
+   preference the global rule collapses the duration, so the element simply
+   appears in its final position. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 700ms var(--ease-quiet) both;
+}
+
+/* The slow pulse behind a hotspot marker. It says the point can be touched and
+   nothing more, so it is quiet, slow, and the first thing to stop when a reader
+   asks for reduced motion. */
+@keyframes breath {
+  0%,
+  100% {
+    transform: scale(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.15;
+  }
+}
+
+/* ==========================================================================
+   Scroll motion
+
+   Two mechanisms, chosen for how each one fails.
+
+   Reveals are driven by a script, because their failure mode matters: a scroll
+   timeline can leave an element that never reaches its range hidden for ever,
+   and unreadable content is worse than static content. Nothing is hidden until
+   the script says so, so no script and no motion preference both mean a plain,
+   fully visible page.
+
+   Drift is a pure CSS scroll timeline, because it only moves something that is
+   already visible. A browser without scroll timelines simply shows a still
+   photograph, which is a perfectly good outcome.
+
+   Both are deliberately small. A reveal travels sixteen pixels, an image drifts
+   three percent of its own height. At that size they read as depth rather than
+   as animation.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  /*
+    Sixteen pixels was too polite to notice. Thirty two with a shade of scale
+    reads as arrival rather than as a rendering artefact, and the longer
+    duration lets the eye follow it instead of catching the end of it.
+
+    It is an animation and not a transition on purpose. A transition here would
+    take over the element's transition property, and every hover effect on the
+    same element would then snap instead of easing, or inherit the stagger
+    delay and lag half a second behind the pointer. An animation leaves the
+    transition property free for whatever the element does under a pointer.
+  */
+  [data-reveal="on"] :is(.reveal, .stagger > *) {
+    opacity: 0;
+  }
+
+  [data-reveal="on"] :is(.reveal, .stagger > *).is-revealed {
+    animation: reveal-in 900ms var(--ease-quiet) both;
+  }
+
+  /*
+    A heading arrives before the things it introduces. Splitting the two by a
+    beat is most of what makes a page feel composed rather than animated.
+  */
+  [data-reveal="on"] .reveal-lead.is-revealed {
+    animation-duration: 1100ms;
+  }
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes drift-up {
+  from {
+    transform: translateY(6%) scale(1.14);
+  }
+  to {
+    transform: translateY(-6%) scale(1.14);
+  }
+}
+
+@keyframes header-settle {
+  from {
+    border-bottom-color: transparent;
+    box-shadow: 0 0 0 0 rgb(30 24 21 / 0);
+  }
+  to {
+    border-bottom-color: var(--color-line);
+    box-shadow: 0 1px 12px -6px rgb(30 24 21 / 0.18);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* A photograph that moves against its frame as the page passes it. The
+       frame clips and the image is overscaled, so no edge is ever exposed. */
+    .drift {
+      animation: drift-up linear both;
+      animation-timeline: view();
+      animation-range: cover;
+      /* No will change here on purpose. A scroll timeline is already composited,
+         and promoting every drifting photograph to its own layer costs more
+         than it saves on a page with a dozen of them. */
+    }
+
+    /* The header earns its line as the page moves under it. Nothing to listen
+       to and nothing to re render: the scroll position drives it. */
+    .site-header {
+      animation: header-settle linear both;
+      animation-timeline: scroll();
+      animation-range: 0 72px;
+    }
+  }
 }

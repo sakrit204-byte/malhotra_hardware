@@ -1,0 +1,714 @@
+[
+  {
+    "label": "handle0",
+    "photo": "photo-1607710533910-d7cdffd9e593",
+    "alt": "gold door lever on brown wooden door",
+    "author": "Sneaky Head",
+    "profile": "sneakyhead",
+    "ratio": 0.8
+  },
+  {
+    "label": "handle1",
+    "photo": "photo-1734094151911-803ee718a921",
+    "alt": "A close up of a door handle on a white door",
+    "author": "Jason Gooljar",
+    "profile": "jasongooljar24",
+    "ratio": 1.5
+  },
+  {
+    "label": "handle5",
+    "photo": "photo-1625259960906-725234a78ed8",
+    "alt": "clear glass bottle on brown wooden table",
+    "author": "Perry Merrity II",
+    "profile": "prince_perry",
+    "ratio": 1.78
+  },
+  {
+    "label": "lever0",
+    "photo": "photo-1583691028182-e8f01e74bfa2",
+    "alt": "silver door lever on gray door",
+    "author": "Shyam",
+    "profile": "thezenoeffect",
+    "ratio": 0.67
+  },
+  {
+    "label": "lever2",
+    "photo": "photo-1734094151911-803ee718a921",
+    "alt": "A close up of a door handle on a white door",
+    "author": "Jason Gooljar",
+    "profile": "jasongooljar24",
+    "ratio": 1.5
+  },
+  {
+    "label": "lever3",
+    "photo": "photo-1528278849011-96a6c2221b50",
+    "alt": "white wooden dor",
+    "author": "Annie Spratt",
+    "profile": "anniespratt",
+    "ratio": 1.5
+  },
+  {
+    "label": "lever4",
+    "photo": "photo-1574588822710-475a38fe3371",
+    "alt": "brown wooden door lever",
+    "author": "H&CO",
+    "profile": "hngstrm",
+    "ratio": 1.5
+  },
+  {
+    "label": "lever5",
+    "photo": "photo-1528278966557-c87afae1e1f7",
+    "alt": "opened white wooden door",
+    "author": "Annie Spratt",
+    "profile": "anniespratt",
+    "ratio": 0.67
+  },
+  {
+    "label": "lever8",
+    "photo": "photo-1573494769092-46dfa3d884ea",
+    "alt": "brown knob on brown surface",
+    "author": "Elias",
+    "profile": "eelias",
+    "ratio": 0.67
+  },
+  {
+    "label": "lever14",
+    "photo": "photo-1657040899628-f4a028c62fbf",
+    "alt": "a door with a lock",
+    "author": "Christina Radevich",
+    "profile": "chris_designer",
+    "ratio": 0.67
+  },
+  {
+    "label": "knob0",
+    "photo": "photo-1734094151911-803ee718a921",
+    "alt": "A close up of a door handle on a white door",
+    "author": "Jason Gooljar",
+    "profile": "jasongooljar24",
+    "ratio": 1.5
+  },
+  {
+    "label": "knob3",
+    "photo": "photo-1528278849011-96a6c2221b50",
+    "alt": "white wooden dor",
+    "author": "Annie Spratt",
+    "profile": "anniespratt",
+    "ratio": 1.5
+  },
+  {
+    "label": "knob4",
+    "photo": "photo-1528278966557-c87afae1e1f7",
+    "alt": "opened white wooden door",
+    "author": "Annie Spratt",
+    "profile": "anniespratt",
+    "ratio": 0.67
+  },
+  {
+    "label": "knob5",
+    "photo": "photo-1625259960906-725234a78ed8",
+    "alt": "clear glass bottle on brown wooden table",
+    "author": "Perry Merrity II",
+    "profile": "prince_perry",
+    "ratio": 1.78
+  },
+  {
+    "label": "lock0",
+    "photo": "photo-1538766017398-415434a31a5b",
+    "alt": "blue wooden door",
+    "author": "Jan Tinneberg",
+    "profile": "craft_ear",
+    "ratio": 1.5
+  },
+  {
+    "label": "lock3",
+    "photo": "flagged/photo-1564767609213-c75ee685263a",
+    "alt": "person holds door lever",
+    "author": "Maria Ziegler",
+    "profile": "schluesseldienstvergleich_eu",
+    "ratio": 1.33
+  },
+  {
+    "label": "lock5",
+    "photo": "photo-1677951570313-b0750351c461",
+    "alt": "a close up of a key on a door",
+    "author": "Dima Solomin",
+    "profile": "solomin_d",
+    "ratio": 0.67
+  },
+  {
+    "label": "lock10",
+    "photo": "photo-1532550256335-c281a64ac9f6",
+    "alt": "green wooden door beside white wall",
+    "author": "Pawel Czerwinski",
+    "profile": "pawel_czerwinski",
+    "ratio": 1.5
+  },
+  {
+    "label": "lock14",
+    "photo": "photo-1574588822710-475a38fe3371",
+    "alt": "brown wooden door lever",
+    "author": "H&CO",
+    "profile": "hngstrm",
+    "ratio": 1.5
+  },
+  {
+    "label": "hinge0",
+    "photo": "photo-1538766017398-415434a31a5b",
+    "alt": "blue wooden door",
+    "author": "Jan Tinneberg",
+    "profile": "craft_ear",
+    "ratio": 1.5
+  },
+  {
+    "label": "hinge1",
+    "photo": "photo-1583691028182-e8f01e74bfa2",
+    "alt": "silver door lever on gray door",
+    "author": "Shyam",
+    "profile": "thezenoeffect",
+    "ratio": 0.67
+  },
+  {
+    "label": "hinge2",
+    "photo": "photo-1588704821128-889309f68363",
+    "alt": "white wooden door with silver door lever",
+    "author": "Vidar Nordli-Mathisen",
+    "profile": "vidarnm",
+    "ratio": 1.31
+  },
+  {
+    "label": "hinge11",
+    "photo": "photo-1779204749779-5296e620968a",
+    "alt": "Silver hinge on dark wooden door and textured white wall",
+    "author": "Izzudin Habib",
+    "profile": "habib2510",
+    "ratio": 1.5
+  },
+  {
+    "label": "closer3",
+    "photo": "photo-1588704821128-889309f68363",
+    "alt": "white wooden door with silver door lever",
+    "author": "Vidar Nordli-Mathisen",
+    "profile": "vidarnm",
+    "ratio": 1.31
+  },
+  {
+    "label": "closer11",
+    "photo": "photo-1759564225887-e2e2e27f8972",
+    "alt": "Close-up of an old door handle and lock with key",
+    "author": "Azmar Aso",
+    "profile": "azmar_aso",
+    "ratio": 1.33
+  },
+  {
+    "label": "closer12",
+    "photo": "photo-1701708523337-1a647e8d0a10",
+    "alt": "a black and white photo of a lock on a door",
+    "author": "Bhargav Panchal",
+    "profile": "bhargavpanchal1986",
+    "ratio": 0.67
+  },
+  {
+    "label": "glass0",
+    "photo": "photo-1588704821128-889309f68363",
+    "alt": "white wooden door with silver door lever",
+    "author": "Vidar Nordli-Mathisen",
+    "profile": "vidarnm",
+    "ratio": 1.31
+  },
+  {
+    "label": "glass4",
+    "photo": "photo-1760893769005-b3d617bd7a69",
+    "alt": "Sunlight streams through a glass-paneled door",
+    "author": "Julian Rösner",
+    "profile": "kipfarl",
+    "ratio": 0.67
+  },
+  {
+    "label": "glass5",
+    "photo": "photo-1730651065851-4622774b6d21",
+    "alt": "A black and white photo of a stair case",
+    "author": "Danila Balashkin",
+    "profile": "danila_balashkin",
+    "ratio": 0.66
+  },
+  {
+    "label": "glass10",
+    "photo": "photo-1764962091350-48fbcb313909",
+    "alt": "Dark wooden stairs leading to a glass-paneled door",
+    "author": "Tsuyoshi Kozu",
+    "profile": "tsuyoshikozu",
+    "ratio": 0.67
+  },
+  {
+    "label": "glass11",
+    "photo": "photo-1766215010263-0e4e9d7b3864",
+    "alt": "Close-up of a shiny metal door handle with curtains",
+    "author": "雙 film",
+    "profile": "film002",
+    "ratio": 1.5
+  },
+  {
+    "label": "glass12",
+    "photo": "photo-1758998256408-ab2c9fbec19b",
+    "alt": "Modern black framed folding glass doors installed",
+    "author": "MBOR MC",
+    "profile": "mbormc",
+    "ratio": 1
+  },
+  {
+    "label": "key3",
+    "photo": "photo-1587195399841-fc7174360a86",
+    "alt": "gold padlock on white surface",
+    "author": "Michael Chacon",
+    "profile": "cloudsrest",
+    "ratio": 1.5
+  },
+  {
+    "label": "key7",
+    "photo": "photo-1744329629869-5cb98169ba59",
+    "alt": "A door secured by a bolt and padlock",
+    "author": "Zoshua Colah",
+    "profile": "zoshuacolah",
+    "ratio": 0.63
+  },
+  {
+    "label": "key11",
+    "photo": "photo-1744329629840-72bb30de38eb",
+    "alt": "A metal lock secures the wooden doors",
+    "author": "Zoshua Colah",
+    "profile": "zoshuacolah",
+    "ratio": 1.5
+  },
+  {
+    "label": "key12",
+    "photo": "photo-1770219792093-85830ce757b7",
+    "alt": "Close-up of a metal screw with concentric circles",
+    "author": "Jonathan Cosens Photography",
+    "profile": "jcosens",
+    "ratio": 1.5
+  },
+  {
+    "label": "key13",
+    "photo": "photo-1744329629767-80ba7dc0cea6",
+    "alt": "A door secured with a bolt and padlock",
+    "author": "Zoshua Colah",
+    "profile": "zoshuacolah",
+    "ratio": 1.5
+  },
+  {
+    "label": "key14",
+    "photo": "photo-1759452003649-552896c8ed63",
+    "alt": "A key is inserted into a lock mechanism",
+    "author": "Derek Nelson",
+    "profile": "gingermanbread",
+    "ratio": 1.5
+  },
+  {
+    "label": "cabinet0",
+    "photo": "photo-1600422086908-72be2c8f5f3f",
+    "alt": "brown wooden cabinet beside white printer",
+    "author": "Xie Yujie Nick",
+    "profile": "xieyujie",
+    "ratio": 0.67
+  },
+  {
+    "label": "cabinet1",
+    "photo": "photo-1761353854322-96e6ab127da4",
+    "alt": "A shiny silver cufflink on a gray surface",
+    "author": "he shiyuan",
+    "profile": "wna2025",
+    "ratio": 1
+  },
+  {
+    "label": "cabinet2",
+    "photo": "photo-1679990130718-78143499971d",
+    "alt": "a close up of a door knob on a cabinet",
+    "author": "Richard Stachmann",
+    "profile": "stachmann",
+    "ratio": 1.5
+  },
+  {
+    "label": "cabinet3",
+    "photo": "photo-1548591443-37f7c0e94f31",
+    "alt": "brown wooden drawer chest",
+    "author": "MChe Lee",
+    "profile": "mclee",
+    "ratio": 1.5
+  },
+  {
+    "label": "cabinet4",
+    "photo": "photo-1646910083956-8c08a99d79a8",
+    "alt": "a close up of a door handle on a door",
+    "author": "engin akyurt",
+    "profile": "enginakyurt",
+    "ratio": 1.33
+  },
+  {
+    "label": "cabinet5",
+    "photo": "photo-1634212926386-91c3827282ee",
+    "alt": "a close up of a door handle on a wooden door",
+    "author": "Erik Mclean",
+    "profile": "introspectivedsgn",
+    "ratio": 1.5
+  },
+  {
+    "label": "cabinet6",
+    "photo": "photo-1732885479994-a71d4b39ef69",
+    "alt": "A close up of a drawer with two handles",
+    "author": "Ruan Richard Rodrigues",
+    "profile": "ricdeoliveira",
+    "ratio": 0.67
+  },
+  {
+    "label": "cabinet7",
+    "photo": "photo-1596834868044-3d398d2a6f28",
+    "alt": "a close up of a door handle on a door",
+    "author": "Paolo Chiabrando",
+    "profile": "chiabra",
+    "ratio": 1.5
+  },
+  {
+    "label": "cabinet8",
+    "photo": "photo-1732885480010-55f88e556afb",
+    "alt": "A close up of a drawer with two handles",
+    "author": "Ruan Richard Rodrigues",
+    "profile": "ricdeoliveira",
+    "ratio": 0.67
+  },
+  {
+    "label": "cabinet9",
+    "photo": "photo-1595418312726-3beb2f4fe67e",
+    "alt": "white wooden door with gold door knob",
+    "author": "Nicola Bushuven",
+    "profile": "bushuven",
+    "ratio": 1.32
+  },
+  {
+    "label": "cabinet11",
+    "photo": "photo-1732885479418-6e50e6f00397",
+    "alt": "A book is sitting on top of a cabinet",
+    "author": "Ruan Richard Rodrigues",
+    "profile": "ricdeoliveira",
+    "ratio": 0.67
+  },
+  {
+    "label": "cabinet13",
+    "photo": "photo-1645743754938-98b77f7524bd",
+    "alt": "a close up of a door handle on a white door",
+    "author": "Rumman Amin",
+    "profile": "rumanamin",
+    "ratio": 0.67
+  },
+  {
+    "label": "cabinet14",
+    "photo": "photo-1634926360833-8a6fd76f0300",
+    "alt": "a close up of a metal object on a table",
+    "author": "Zain Khan",
+    "profile": "aabedeen51",
+    "ratio": 1.33
+  },
+  {
+    "label": "sliding2",
+    "photo": "photo-1663131073253-0e19e0eb5c55",
+    "alt": "a staircase leading to a door",
+    "author": "Zac Gudakov",
+    "profile": "zacgudakov",
+    "ratio": 1.5
+  },
+  {
+    "label": "sliding3",
+    "photo": "photo-1768307198334-d176402a3f3d",
+    "alt": "Two large wooden barn doors open into a hall",
+    "author": "Ruben Mavarez",
+    "profile": "justalifein",
+    "ratio": 0.67
+  },
+  {
+    "label": "sliding10",
+    "photo": "photo-1772945493132-62afe31ca056",
+    "alt": "Wedding ceremony setup with open barn doors and guests seated",
+    "author": "Brooke Balentine",
+    "profile": "brookebalentine",
+    "ratio": 1.5
+  },
+  {
+    "label": "bathroom5",
+    "photo": "photo-1721160781331-217376049070",
+    "alt": "A bathroom with a sink and a mirror",
+    "author": "Daske_ Shelf",
+    "profile": "daske",
+    "ratio": 0.67
+  },
+  {
+    "label": "bathroom6",
+    "photo": "photo-1595428774277-f20931fb8db4",
+    "alt": "black plastic bottle on white table",
+    "author": "Sanibell BV",
+    "profile": "sanibell",
+    "ratio": 1.5
+  },
+  {
+    "label": "bathroom7",
+    "photo": "photo-1629819481704-ed9d9bfb036a",
+    "alt": "white wooden window frame near white wall",
+    "author": "Alfonso Escu",
+    "profile": "alfonsescu",
+    "ratio": 0.67
+  },
+  {
+    "label": "bathroom9",
+    "photo": "photo-1721161862977-b9e580533140",
+    "alt": "A white towel hanging on the side of a shower",
+    "author": "Daske_ Shelf",
+    "profile": "daske",
+    "ratio": 0.67
+  },
+  {
+    "label": "bathroom11",
+    "photo": "photo-1711059949530-a3057eac6f1c",
+    "alt": "a white bath tub sitting next to a gold faucet",
+    "author": "Lisha Riabinina",
+    "profile": "weekendtripcreator",
+    "ratio": 0.67
+  },
+  {
+    "label": "bathroom12",
+    "photo": "photo-1761353854322-96e6ab127da4",
+    "alt": "A shiny silver cufflink on a gray surface",
+    "author": "he shiyuan",
+    "profile": "wna2025",
+    "ratio": 1
+  },
+  {
+    "label": "bathroom14",
+    "photo": "photo-1766215010263-0e4e9d7b3864",
+    "alt": "Close-up of a shiny metal door handle with curtains",
+    "author": "雙 film",
+    "profile": "film002",
+    "ratio": 1.5
+  },
+  {
+    "label": "security3",
+    "photo": "photo-1587195399841-fc7174360a86",
+    "alt": "gold padlock on white surface",
+    "author": "Michael Chacon",
+    "profile": "cloudsrest",
+    "ratio": 1.5
+  },
+  {
+    "label": "security5",
+    "photo": "photo-1584985429980-a9db9a42b324",
+    "alt": "gold padlock on white surface",
+    "author": "Everyday basics",
+    "profile": "zanardi",
+    "ratio": 0.67
+  },
+  {
+    "label": "security6",
+    "photo": "photo-1592744254966-58c65cfd2e69",
+    "alt": "silver and black combination lock",
+    "author": "Nicolas HIPPERT",
+    "profile": "nhippert",
+    "ratio": 1.5
+  },
+  {
+    "label": "security7",
+    "photo": "photo-1696013910376-c56f76dd8178",
+    "alt": "a closed padlock on a black surface",
+    "author": "Kedibone Isaac Makhumisane",
+    "profile": "isaax_the_artist",
+    "ratio": 1.46
+  },
+  {
+    "label": "window0",
+    "photo": "photo-1776417078345-7a33d7a3860a",
+    "alt": "View through a white door frame to a balcony",
+    "author": "James Coleman",
+    "profile": "jhc",
+    "ratio": 0.67
+  },
+  {
+    "label": "window1",
+    "photo": "photo-1776417091038-df7f71687a1e",
+    "alt": "Close-up of a brass door handle on a white door",
+    "author": "James Coleman",
+    "profile": "jhc",
+    "ratio": 0.67
+  },
+  {
+    "label": "window6",
+    "photo": "photo-1766752599571-ce70688f7b83",
+    "alt": "A metal door handle on a white door",
+    "author": "atelierbyvineeth ...",
+    "profile": "atelierbyvineeth",
+    "ratio": 1.5
+  },
+  {
+    "label": "house3",
+    "photo": "photo-1698994705178-d244d73ea573",
+    "alt": "a house on a hill surrounded by trees and rocks",
+    "author": "juan verdaguer aguerrebehere",
+    "profile": "urbanrival",
+    "ratio": 0.86
+  },
+  {
+    "label": "house6",
+    "photo": "photo-1635006459494-c9b9665a666e",
+    "alt": "a modern house with a walkway leading to it",
+    "author": "Billy Jo Catbagan",
+    "profile": "billy_sixteenstudio",
+    "ratio": 0.8
+  },
+  {
+    "label": "house8",
+    "photo": "photo-1591474200742-8e512e6f98f8",
+    "alt": "white and brown wooden house under blue sky during daytime",
+    "author": "Naomi Ellsworth",
+    "profile": "naomi_ruth",
+    "ratio": 1.33
+  },
+  {
+    "label": "house9",
+    "photo": "photo-1633354747567-e0682586f082",
+    "alt": "a modern house with a pergolated roof",
+    "author": "juan verdaguer aguerrebehere",
+    "profile": "urbanrival",
+    "ratio": 1.27
+  },
+  {
+    "label": "house12",
+    "photo": "photo-1660361339436-ddd4b85372da",
+    "alt": "a white building with a black door",
+    "author": "Bilal Mansuri",
+    "profile": "itsbilalmn",
+    "ratio": 0.8
+  },
+  {
+    "label": "interior1",
+    "photo": "photo-1567016376408-0226e4d0c1ea",
+    "alt": "black and brown leather padded tub sofa",
+    "author": "Inside Weather",
+    "profile": "insideweather",
+    "ratio": 0.67
+  },
+  {
+    "label": "interior4",
+    "photo": "photo-1672345158827-7f4aa9467b49",
+    "alt": "a living room with a couch and a table",
+    "author": "Prydumano Design",
+    "profile": "prydumanodesign",
+    "ratio": 0.8
+  },
+  {
+    "label": "interior6",
+    "photo": "photo-1599696848652-f0ff23bc911f",
+    "alt": "brown and white couch beside window",
+    "author": "aranprime",
+    "profile": "aranprime",
+    "ratio": 0.67
+  },
+  {
+    "label": "interior9",
+    "photo": "photo-1724582586458-a51791349977",
+    "alt": "A modern living room with a large window",
+    "author": "Prydumano Design",
+    "profile": "prydumanodesign",
+    "ratio": 0.8
+  },
+  {
+    "label": "kitchen1",
+    "photo": "photo-1512916194211-3f2b7f5f7de3",
+    "alt": "brown wooden kitchen cabinet",
+    "author": "Frames For Your Heart",
+    "profile": "framesforyourheart",
+    "ratio": 1.5
+  },
+  {
+    "label": "kitchen2",
+    "photo": "photo-1684928365167-e91916573122",
+    "alt": "a modern kitchen with a bar and stools",
+    "author": "SPurno Animation Studio",
+    "profile": "spurno",
+    "ratio": 1.5
+  },
+  {
+    "label": "kitchen6",
+    "photo": "photo-1759147960461-b74a7e9a75d4",
+    "alt": "Modern kitchen with island and bar stools",
+    "author": "Alina Tramontana",
+    "profile": "render_innovate3d",
+    "ratio": 1.66
+  },
+  {
+    "label": "stair3",
+    "photo": "photo-1529160638848-c6c71fee1cb7",
+    "alt": "lighter staircase with railings",
+    "author": "Alessia Cocconi",
+    "profile": "alessia_cocconi",
+    "ratio": 1.5
+  },
+  {
+    "label": "stair6",
+    "photo": "photo-1582528616547-b024caa3c7cc",
+    "alt": "people walking inside building during daytime",
+    "author": "Redd Francisco",
+    "profile": "reddfrancisco",
+    "ratio": 0.67
+  },
+  {
+    "label": "stair12",
+    "photo": "photo-1587574640043-c22c11ddddc0",
+    "alt": "people walking on white spiral staircase",
+    "author": "Ibrahim Abazid",
+    "profile": "iabzd",
+    "ratio": 0.75
+  },
+  {
+    "label": "entrance2",
+    "photo": "photo-1659720879327-827462ca3942",
+    "alt": "a door with a window",
+    "author": "Hans",
+    "profile": "hansphoto",
+    "ratio": 0.67
+  },
+  {
+    "label": "entrance3",
+    "photo": "photo-1624210473530-62ac2173fcf8",
+    "alt": "black wooden framed glass door",
+    "author": "Capped X",
+    "profile": "cappedx",
+    "ratio": 0.75
+  },
+  {
+    "label": "entrance5",
+    "photo": "photo-1770786174932-293eaf17f919",
+    "alt": "A modern black door with glass panels",
+    "author": "steel doors",
+    "profile": "steel123",
+    "ratio": 0.67
+  },
+  {
+    "label": "entrance6",
+    "photo": "photo-1776632001065-ad9efe3ee60e",
+    "alt": "A modern wooden door with square handles",
+    "author": "Margo Evardson",
+    "profile": "stadinstudio",
+    "ratio": 1.52
+  },
+  {
+    "label": "entrance8",
+    "photo": "photo-1710002580424-8073c65557a2",
+    "alt": "a number seven on a white wall",
+    "author": "Alex Skobe",
+    "profile": "alex_skobe",
+    "ratio": 1.5
+  },
+  {
+    "label": "entrance9",
+    "photo": "photo-1710002580308-58c7c26a466e",
+    "alt": "a close up of a house number on a wall",
+    "author": "Alex Skobe",
+    "profile": "alex_skobe",
+    "ratio": 1.5
+  }
+]
